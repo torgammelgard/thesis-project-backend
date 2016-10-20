@@ -10,6 +10,10 @@ In order to build this project, clone the project,
 
 and use the gradle wrapper
 
-`./gradlew `  (on Mac)
+`./gradlew build`  (on Mac)
 
-`gradlew `    (on Windows)
+`gradlew build`    (on Windows)
+
+## Technologies
+
+Java 8, Spring 4, Spring Data, Hibernate, Gradle. 
