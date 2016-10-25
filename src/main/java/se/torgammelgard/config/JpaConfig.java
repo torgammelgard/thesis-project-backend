@@ -60,7 +60,7 @@ public class JpaConfig {
     @Bean(name = "localDataSource")
     public DataSource localDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        //dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl(dataSourceProperties.getUrl());
         dataSource.setUsername("root");
         dataSource.setPassword("root");

@@ -46,4 +46,9 @@ public class Game {
     public void setVersion(long version) {
         this.version = version;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Game name : %s", getName());
+    }
 }

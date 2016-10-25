@@ -1,4 +1,4 @@
-package se.torgammelgard.config;
+package se.torgammelgard.web.config;
 
 
 import org.springframework.context.annotation.ComponentScan;
@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-@ComponentScan(basePackages = "se.torgammelgard.config")
+@ComponentScan("se.torgammelgard.web")
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
 
