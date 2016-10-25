@@ -1,7 +1,6 @@
 package se.torgammelgard.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.CollectionUtils;
 import org.springframework.stereotype.Service;
 import se.torgammelgard.persistence.entities.Game;
 import se.torgammelgard.repository.GameRepository;

@@ -1,5 +1,8 @@
 package se.torgammelgard.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import se.torgammelgard.Views;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,9 +11,11 @@ public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(Views.Public.class)
     private long id;
 
     @Column
+    @JsonView(Views.Public.class)
     private String name;
 
     @Version
