@@ -22,6 +22,7 @@ public class GameController {
     @ResponseStatus(HttpStatus.OK)
     @JsonView(Views.Public.class)
     public @ResponseBody List<Game> getGames() {
+        System.out.println(new Game("haj").toString());
         List<Game> games = gameService.findAll();
         return games;
     }
