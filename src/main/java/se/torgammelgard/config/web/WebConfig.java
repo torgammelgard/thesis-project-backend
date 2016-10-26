@@ -1,4 +1,4 @@
-package se.torgammelgard.web.config;
+package se.torgammelgard.config.web;
 
 
 import org.springframework.context.annotation.Bean;

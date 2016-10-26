@@ -1,8 +1,10 @@
 package se.torgammelgard.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.*;
-import org.springframework.beans.factory.annotation.Required;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import se.torgammelgard.Views;
 
 import javax.persistence.*;
@@ -18,7 +20,6 @@ public class Game {
     @JsonView(Views.Public.class)
     private long id;
 
-    @Column
     @JsonView(Views.Public.class)
     @NonNull
     private String name;

@@ -1,4 +1,4 @@
-package se.torgammelgard.config;
+package se.torgammelgard.config.persistence;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

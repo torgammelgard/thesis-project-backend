@@ -1,8 +1,7 @@
-package se.torgammelgard.web;
+package se.torgammelgard.config.web;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import se.torgammelgard.config.CoreConfig;
-import se.torgammelgard.web.config.WebConfig;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
