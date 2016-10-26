@@ -41,4 +41,8 @@ dependencies {
     // Test
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.3.RELEASE'
+
+    // View
+    compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.2.RELEASE'
+    compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '3.0.2.RELEASE'
 }

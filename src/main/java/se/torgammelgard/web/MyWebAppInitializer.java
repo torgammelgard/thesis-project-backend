@@ -4,7 +4,14 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import se.torgammelgard.config.CoreConfig;
 import se.torgammelgard.web.config.WebConfig;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
 public class MyWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
+    }
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
