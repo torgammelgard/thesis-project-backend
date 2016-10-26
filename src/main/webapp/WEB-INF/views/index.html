@@ -2,6 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Thymeleaf test page</title>
+  <link th:href="@{/styles/main.css}" rel="stylesheet">
 </head>
 <body>
 
@@ -11,7 +12,7 @@
 
 <span th:text="${serverTime}"></span><br/>
 
-<img src="/images/tennisball.png" th:src="@{/images/tennisball.png}">
+<img th:src="@{/images/tennisball.png}">
 
 </body>
 </html>
