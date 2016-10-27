@@ -14,4 +14,6 @@ public class TeamService {
     public Iterable<Team> findAll(){
         return teamRepository.findAll();
     }
+
+    public Team save(Team team) {return teamRepository.save(team);}
 }

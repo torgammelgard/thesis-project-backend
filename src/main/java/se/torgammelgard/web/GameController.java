@@ -3,7 +3,6 @@ package se.torgammelgard.web;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import se.torgammelgard.Views;
 import se.torgammelgard.persistence.entities.Game;
@@ -12,13 +11,13 @@ import se.torgammelgard.service.GameService;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/game")
+@RequestMapping(value = "api/game")
 public class GameController {
 
     @Autowired
     private GameService gameService;
 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     @JsonView(Views.Public.class)
     public @ResponseBody List<Game> getGames() {

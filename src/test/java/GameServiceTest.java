@@ -16,7 +16,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestConfig.class})
 //@WebAppConfiguration("se.torgammelgard.config")
-public class GameTest {
+public class GameServiceTest {
 
     private static final Game TEST_GAME_1 = new Game("Test game 1");
     private static final Game TEST_GAME_2 = new Game("Test game 2");

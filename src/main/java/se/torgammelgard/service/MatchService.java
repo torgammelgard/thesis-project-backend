@@ -1,0 +1,27 @@
+package se.torgammelgard.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import se.torgammelgard.persistence.entities.Match;
+import se.torgammelgard.repository.MatchRepository;
+
+import java.util.Collections;
+import java.util.List;
+
+@Service
+public class MatchService {
+
+    @Autowired
+    private MatchRepository matchRepository;
+
+    public List<Match> findAll() {
+        List<Match> matches = Collections.emptyList();
+        matchRepository.findAll().forEach(matches::add);
+        return matches;
+    }
+
+    public Match save(Match match) {
+        return matchRepository.save(match);
+    }
+
+}
