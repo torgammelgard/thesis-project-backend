@@ -18,4 +18,9 @@ public class RootController {
         model.addAttribute("serverTime", dateFormat.format(new Date()));
         return "index";
     }
+
+    @RequestMapping("/addmatch")
+    public String addMatch() {
+        return "addmatch";
+    }
 }
