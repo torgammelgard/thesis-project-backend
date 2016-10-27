@@ -20,5 +20,5 @@ public class User {
     private String password;
 
     @NonNull
-    private boolean enabled;
+    private Boolean enabled;
 }
