@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 @RestController
-@RequestMapping("api/team")
+@RequestMapping("/api/team")
 public class TeamController {
 
     @Autowired

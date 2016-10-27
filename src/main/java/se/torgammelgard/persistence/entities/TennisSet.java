@@ -1,6 +1,8 @@
 package se.torgammelgard.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
+import se.torgammelgard.Views;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class TennisSet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(Views.Public.class)
     private Long tennisset_id;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tennisSets")
