@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Add match page</title>
+  <link th:href="@{/styles/main.css}" rel="stylesheet">
 </head>
 <body>
+
+<!--/*@thymesVar id="match" type="se.torgammelgard.persistence.entities.Match"*/-->
+<form th:border="1" action="#" th:action="@{/matchmng}" th:object="${match}" method="post">
+  <input type="text" th:title="First input">
+  <input th:title="Team one" type="text" id="teamOne" name="teamOne" th:value="*{teamOne}"/>
+  <input type="text" th:field="*{teamTwo}"/>
+</form>
+
 
 </body>
 </html>
