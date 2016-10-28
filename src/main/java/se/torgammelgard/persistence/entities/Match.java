@@ -1,6 +1,8 @@
 package se.torgammelgard.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
+import se.torgammelgard.Views;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,12 +15,18 @@ public class Match {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(Views.Public.class)
     private Long match_id;
 
+    @JsonView
+    private String name;
+
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonView(Views.Public.class)
     private Team teamOne;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonView(Views.Public.class)
     private Team teamTwo;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "matches")
