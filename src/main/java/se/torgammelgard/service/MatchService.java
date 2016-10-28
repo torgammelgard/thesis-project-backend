@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.repository.MatchRepository;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,7 +15,7 @@ public class MatchService {
     private MatchRepository matchRepository;
 
     public List<Match> findAll() {
-        List<Match> matches = Collections.emptyList();
+        List<Match> matches = new ArrayList<>(0);
         matchRepository.findAll().forEach(matches::add);
         return matches;
     }
