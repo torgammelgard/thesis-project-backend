@@ -1,40 +1,43 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Add match page</title>
-  <link th:href="@{/styles/main.css}" rel="stylesheet">
+  <title>View matches</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous"></script>
+  <link rel="stylesheet" th:href="@{/styles/main.css}">
 </head>
 <body>
 
-<h1>Add a match page!</h1>
+<div class="container">
+  <h1>Add a match page!</h1>
 
-<form action="#" th:action="@{/match/save}" th:object="${match}" method="post">
-  <table border="1">
-    <tr>
-      <td><label th:text="#{addmatchform.name}"></label></td>
-      <td><input type="text" th:field="*{name}"/></td>
-    </tr>
-    <tr>
-      <td><label th:text="#{addmatchform.teamone}"></label></td>
-      <td>
-        <select th:field="*{teamOne}">
-          <option th:each="team : ${teams}" th:value="${{team}}" th:text="${team.getTeamName()}"></option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td><label th:text="#{addmatchform.teamtwo}"></label></td>
-      <td>
-        <select th:field="*{teamTwo}">
-          <option th:each="team : ${teams}" th:value="${{team}}" th:text="${team.getTeamName()}"></option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td><input type="submit" value="Submit"/></td>
-    </tr>
-  </table>
-</form>
+  <form class="form-horizontal" action="#" th:action="@{/match/save}" th:object="${match}" method="post">
+    <div class="form-group">
+      <label for="name" th:text="#{addmatchform.name}"></label>
+      <input id="name" class="form-control" type="text" th:field="*{name}"/>
+    </div>
 
+    <div class="form-group">
+      <label for="teamoneselect" th:text="#{addmatchform.teamone}"></label>
+      <select id="teamoneselect" class="form-control" th:field="*{teamOne}">
+        <option th:each="team : ${teams}" th:value="${{team}}" th:text="${team.getTeamName()}"></option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="teamtwoselect" th:text="#{addmatchform.teamtwo}"></label>
+      <select id="teamtwoselect" class="form-control" th:field="*{teamTwo}">
+        <option th:each="team : ${teams}" th:value="${{team}}" th:text="${team.getTeamName()}"></option>
+      </select>
+    </div>
+
+    <input type="number"/>
+    <input type="number"/>
+
+    <button type="button" class="btn btn-default">Submit</button>
+  </form>
+</div>
 </body>
 </html>
