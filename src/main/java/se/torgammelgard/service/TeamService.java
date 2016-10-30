@@ -5,15 +5,26 @@ import org.springframework.stereotype.Service;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.repository.TeamRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class TeamService {
 
     @Autowired
     private TeamRepository teamRepository;
 
-    public Iterable<Team> findAll(){
-        return teamRepository.findAll();
+    public List<Team> findAll() {
+        List<Team> teams = new ArrayList<>(0);
+        teamRepository.findAll().forEach(teams::add);
+        return teams;
     }
 
-    public Team save(Team team) {return teamRepository.save(team);}
+    public Team save(Team team) {
+        return teamRepository.save(team);
+    }
+
+    public Team find(Long id) {
+        return teamRepository.findOne(id);
+    }
 }

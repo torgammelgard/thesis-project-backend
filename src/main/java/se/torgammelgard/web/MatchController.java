@@ -1,7 +1,6 @@
 package se.torgammelgard.web;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +31,10 @@ public class MatchController {
     @ResponseBody
     Match addMatch(@RequestBody Match match) {
         return matchService.save(match);
+    }
+
+    @ModelAttribute("allMatches")
+    public List<Match> populateMatches() {
+        return matchService.findAll();
     }
 }

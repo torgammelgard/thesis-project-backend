@@ -23,10 +23,7 @@ public class TeamController {
     @RequestMapping
     @JsonView(Views.Public.class)
     public @ResponseBody List<Team> getAllTeams() {
-        Iterable<Team> teams_iter = teamService.findAll();
-        List<Team> teams = new ArrayList<>(0);
-        teams_iter.forEach(teams::add);
-        return teams;
+        return teamService.findAll();
     }
 
     @RequestMapping("/add")

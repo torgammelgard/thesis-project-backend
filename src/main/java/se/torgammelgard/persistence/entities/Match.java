@@ -18,7 +18,7 @@ public class Match {
     @JsonView(Views.Public.class)
     private Long match_id;
 
-    @JsonView
+    @JsonView(Views.Public.class)
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)

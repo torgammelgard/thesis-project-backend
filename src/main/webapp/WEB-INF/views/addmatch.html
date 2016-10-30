@@ -1,4 +1,3 @@
-
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
@@ -7,13 +6,35 @@
 </head>
 <body>
 
-<!--/*@thymesVar id="match" type="se.torgammelgard.persistence.entities.Match"*/-->
-<form th:border="1" action="#" th:action="@{/matchmng}" th:object="${match}" method="post">
-  <input type="text" th:title="First input">
-  <input th:title="Team one" type="text" id="teamOne" name="teamOne" th:value="*{teamOne}"/>
-  <input type="text" th:field="*{teamTwo}"/>
-</form>
+<h1>Add a match page!</h1>
 
+<form action="#" th:action="@{/savematch}" th:object="${match}" method="post">
+  <table border="1">
+    <tr>
+      <td><label th:text="#{addmatchform.name}"></label></td>
+      <td><input type="text" th:field="*{name}"/></td>
+    </tr>
+    <tr>
+      <td><label th:text="#{addmatchform.teamone}"></label></td>
+      <td>
+        <select th:field="*{teamOne}">
+          <option th:each="team : ${teams}" th:value="${{team}}" th:text="${team.getTeamName()}"></option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><label th:text="#{addmatchform.teamtwo}"></label></td>
+      <td>
+        <select th:field="*{teamTwo}">
+          <option th:each="team : ${teams}" th:value="${{team}}" th:text="${team.getTeamName()}"></option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><input type="submit" value="Submit"/></td>
+    </tr>
+  </table>
+</form>
 
 </body>
 </html>

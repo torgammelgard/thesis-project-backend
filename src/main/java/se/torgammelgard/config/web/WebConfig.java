@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -13,6 +14,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+import se.torgammelgard.formatters.TeamFormatter;
 
 import javax.servlet.ServletContext;
 
@@ -23,9 +25,19 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ServletContext
 
     private ServletContext servletContext;
 
+    @Bean
+    public TeamFormatter teamFormatter() {
+        return new TeamFormatter();
+    }
+
     @Override
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(teamFormatter());
     }
 
     @Bean
