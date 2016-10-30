@@ -16,4 +16,5 @@ and use the gradle wrapper
 
 ## Technologies
 
-Java 8, Spring 4, Spring Data, Hibernate, MySQL, Gradle. 
+Java 8, Spring 4, Spring Data, Hibernate, MySQL, Gradle, Thymeleaf, 
+Bootstrap, Git, GitHub.

@@ -21,12 +21,17 @@ public class MatchPathController {
     @Autowired
     private MatchService matchService;
 
+    @RequestMapping("/view_matches_page")
+    public String viewMatches(Model model) {
+        model.addAttribute("matches", matchService.findAll());
+        return "view_matches";
+    }
 
     @RequestMapping("/add_form_page")
     public String addMatch(Model model) {
         model.addAttribute("match", new Match());
         model.addAttribute("teams", teamService.findAll());
-        return "addmatch";
+        return "add_match";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)

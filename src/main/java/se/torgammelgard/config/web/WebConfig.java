@@ -75,7 +75,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ServletContext
                 .addResourceLocations("/resources/");
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("/resources/images/");
-        registry.addResourceHandler("/styles/")
+        registry.addResourceHandler("/styles/**")
                 .addResourceLocations("/resources/styles/");
     }
 }
