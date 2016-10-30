@@ -19,7 +19,7 @@ import se.torgammelgard.formatters.TeamFormatter;
 import javax.servlet.ServletContext;
 
 @Configuration
-@ComponentScan("se.torgammelgard.web")
+@ComponentScan({"se.torgammelgard.web", "se.torgammelgard.api"})
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter implements ServletContextAware {
 

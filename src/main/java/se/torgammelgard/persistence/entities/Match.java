@@ -21,11 +21,11 @@ public class Match {
     @JsonView(Views.Public.class)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JsonView(Views.Public.class)
     private Team teamOne;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JsonView(Views.Public.class)
     private Team teamTwo;
 

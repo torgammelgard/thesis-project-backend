@@ -1,4 +1,4 @@
-package se.torgammelgard.web;
+package se.torgammelgard.api;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;

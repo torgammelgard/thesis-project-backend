@@ -1,4 +1,4 @@
-package se.torgammelgard.web;
+package se.torgammelgard.api;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import se.torgammelgard.Views;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.service.TeamService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
