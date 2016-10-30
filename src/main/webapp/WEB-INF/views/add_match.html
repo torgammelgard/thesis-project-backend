@@ -33,10 +33,12 @@
       </select>
     </div>
 
-    <input type="number"/>
-    <input type="number"/>
-
-    <button type="button" class="btn btn-default">Submit</button>
+    <!--/*@thymesVar id="setscore" type="se.torgammelgard.persistence.entities.TennisSetScore"*/-->
+    <div class="form-group" th:object="${setscore}">
+      <input type="number" class="form-control" th:field="*{setScoreTeamOne}"/>
+      <input type="number" class="form-control" th:field="*{setScoreTeamTwo}"/>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
   </form>
 </div>
 </body>
