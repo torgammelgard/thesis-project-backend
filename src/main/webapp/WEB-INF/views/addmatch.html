@@ -8,7 +8,7 @@
 
 <h1>Add a match page!</h1>
 
-<form action="#" th:action="@{/savematch}" th:object="${match}" method="post">
+<form action="#" th:action="@{/match/save}" th:object="${match}" method="post">
   <table border="1">
     <tr>
       <td><label th:text="#{addmatchform.name}"></label></td>
