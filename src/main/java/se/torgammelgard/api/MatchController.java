@@ -17,7 +17,12 @@ public class MatchController {
     @Autowired
     private MatchService matchService;
 
-    @RequestMapping
+    @ModelAttribute("allMatches")
+    public List<Match> populateMatches() {
+        return matchService.findAll();
+    }
+
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @JsonView(Views.Public.class)
     public
@@ -31,10 +36,5 @@ public class MatchController {
     @ResponseBody
     Match addMatch(@RequestBody Match match) {
         return matchService.save(match);
-    }
-
-    @ModelAttribute("allMatches")
-    public List<Match> populateMatches() {
-        return matchService.findAll();
     }
 }

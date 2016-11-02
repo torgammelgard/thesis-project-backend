@@ -2,9 +2,8 @@ package se.torgammelgard.api;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.annotation.SessionScope;
 import se.torgammelgard.Views;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.service.TeamService;
@@ -19,12 +18,13 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
-    @RequestMapping
+    @GetMapping
     @JsonView(Views.Public.class)
     public @ResponseBody List<Team> getAllTeams() {
         return teamService.findAll();
     }
 
+    // TODO should be deleted later and replaced with POST
     @RequestMapping("/add")
     public void addTeam() {
         Team team = new Team();

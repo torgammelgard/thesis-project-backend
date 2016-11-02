@@ -2,6 +2,7 @@ package se.torgammelgard.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import se.torgammelgard.persistence.entities.Game;
 import se.torgammelgard.repository.GameRepository;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class GameService {
 
     private GameRepository gameRepository;
