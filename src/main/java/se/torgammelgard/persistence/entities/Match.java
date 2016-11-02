@@ -1,7 +1,7 @@
 package se.torgammelgard.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.Data;
+import lombok.*;
 import se.torgammelgard.Views;
 
 import javax.persistence.*;
@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "matches")
 @Data
+@NoArgsConstructor @RequiredArgsConstructor
 public class Match {
 
     @Id
@@ -18,17 +19,32 @@ public class Match {
     @JsonView(Views.Public.class)
     private Long match_id;
 
+    @NonNull
     @JsonView(Views.Public.class)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "team_1_id", foreignKey = @ForeignKey(name = "TEAM_1_ID_FK"))
+    @NonNull @Setter(AccessLevel.NONE)
     @JsonView(Views.Public.class)
     private Team teamOne;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "team_2_id", foreignKey = @ForeignKey(name = "TEAM_2_ID_FK"))
+    @NonNull @Setter(AccessLevel.NONE)
     @JsonView(Views.Public.class)
     private Team teamTwo;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "matches")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "matches", cascade = {CascadeType.ALL})
     private List<TennisSet> tennisSets = new ArrayList<>(0);
+
+    public void setTeamOne(Team teamOne) {
+        this.teamOne = teamOne;
+        teamOne.addTeam1_match(this);
+    }
+
+    public void setTeamTwo(Team teamTwo) {
+        this.teamTwo = teamTwo;
+        teamOne.addTeam2_match(this);
+    }
 }

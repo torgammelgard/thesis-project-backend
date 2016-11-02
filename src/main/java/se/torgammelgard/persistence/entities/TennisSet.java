@@ -20,11 +20,11 @@ public class TennisSet {
     @JsonView(Views.Public.class)
     private Long tennisset_id;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tennisSets")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tennisSets", cascade = CascadeType.ALL)
     private List<TennisSetScore> tennisSetScore = new ArrayList<>(0);
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinTable(name = "set_match", joinColumns = {@JoinColumn(name = "tennisset_id", nullable = false)},
     inverseJoinColumns = {@JoinColumn(name = "match_id", nullable = false)})
-    private Set<Match> matches = new HashSet<>(0);
+    private List<Match> matches = new ArrayList<>(0);
 }

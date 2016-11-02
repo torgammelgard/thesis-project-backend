@@ -13,6 +13,7 @@ import se.torgammelgard.persistence.entities.TennisSetScore;
 import se.torgammelgard.service.MatchService;
 import se.torgammelgard.service.TeamService;
 import se.torgammelgard.service.TennisSetScoreService;
+import se.torgammelgard.service.TennisSetService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,9 @@ public class MatchPathController {
 
     @Autowired
     private TennisSetScoreService tennisSetScoreService;
+
+    @Autowired
+    private TennisSetService tennisSetService;
 
     @Autowired
     private MatchService matchService;
@@ -45,25 +49,39 @@ public class MatchPathController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String matchmng(@ModelAttribute Match match, @ModelAttribute TennisSetScore score, BindingResult bindingResult, Model model) {
+    public String matchmng(
+            @ModelAttribute Match match,
+            @ModelAttribute TennisSetScore setscore,
+            BindingResult bindingResult,
+            Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
             return "error_page";
         }
 
-        score = tennisSetScoreService.save(score);
         List<TennisSetScore> tennisSetScores = new ArrayList<>(0);
-        tennisSetScores.add(score);
+        tennisSetScores.add(setscore);
+        TennisSet tennisSet = new TennisSet();
+        tennisSet.setTennisSetScore(tennisSetScores);
+        List<TennisSet> tennisSets = new ArrayList<>(0);
+        tennisSets.add(tennisSet);
+        //match.setTennisSets(tennisSets);
+        matchService.save(match);
+/*
+        setscore = tennisSetScoreService.save(setscore);
+        List<TennisSetScore> tennisSetScores = new ArrayList<>(0);
+        tennisSetScores.add(setscore);
 
         TennisSet tennisSet = new TennisSet();
         tennisSet.setTennisSetScore(tennisSetScores);
+        tennisSet = tennisSetService.save(tennisSet);
 
         List<TennisSet> tennisSets = new ArrayList<>(0);
         tennisSets.add(tennisSet);
-
         match.setTennisSets(tennisSets);
-
         matchService.save(match);
+*/
+
         return "redirect:/api/match";
     }
 }

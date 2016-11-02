@@ -15,6 +15,7 @@
   <h1>Add a match page!</h1>
 
   <form class="form-horizontal" action="#" th:action="@{/match/save}" th:object="${match}" method="post">
+
     <div class="form-group">
       <label for="name" th:text="#{addmatchform.name}"></label>
       <input id="name" class="form-control" type="text" th:field="*{name}"/>
@@ -26,13 +27,13 @@
         <option th:each="team : ${teams}" th:value="${{team}}" th:text="${team.getTeamName()}"></option>
       </select>
     </div>
+
     <div class="form-group">
       <label for="teamtwoselect" th:text="#{addmatchform.teamtwo}"></label>
       <select id="teamtwoselect" class="form-control" th:field="*{teamTwo}">
         <option th:each="team : ${teams}" th:value="${{team}}" th:text="${team.getTeamName()}"></option>
       </select>
     </div>
-
     <!--/*@thymesVar id="setscore" type="se.torgammelgard.persistence.entities.TennisSetScore"*/-->
     <div class="form-group" th:object="${setscore}">
       <input type="number" class="form-control" th:field="*{setScoreTeamOne}"/>

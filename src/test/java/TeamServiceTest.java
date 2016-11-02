@@ -15,8 +15,8 @@ import se.torgammelgard.service.TeamService;
 @ContextConfiguration(classes = {TestConfig.class})
 public class TeamServiceTest {
 
-    private static final Team TEAM_ONE = new Team(1L, "Team name 1", "Foo", "Bar", null);
-    private static final Team TEAM_TWO = new Team(2L, "Team name 2", "Foo", "Bar", null);
+    private static final Team TEAM_ONE = new Team(1L, "Team name 1", "Foo", "Bar");
+    private static final Team TEAM_TWO = new Team(2L, "Team name 2", "Foo", "Bar");
 
     @Autowired
     private TeamRepository teamRepository;
