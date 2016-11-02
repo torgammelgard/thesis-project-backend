@@ -82,8 +82,6 @@ public class MatchServiceTest {
         matches = matchService.findAll();
         Assert.assertEquals("Matches found should be 1", 1, matches.size());
 
-        matches.get(0).getTennisSets().forEach(System.out::println);
-
     }
 
     @After

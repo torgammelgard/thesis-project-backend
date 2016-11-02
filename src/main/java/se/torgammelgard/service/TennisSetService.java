@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import se.torgammelgard.persistence.entities.TennisSet;
 import se.torgammelgard.repository.TennisSetRepository;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class TennisSetService {
     private TennisSetRepository tennisSetRepository;
 
     public List<TennisSet> findAll() {
-        List<TennisSet> tennisSets = Collections.emptyList();
+        List<TennisSet> tennisSets = new ArrayList<>(0);
         tennisSetRepository.findAll().forEach(tennisSets::add);
         return tennisSets;
     }
