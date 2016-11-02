@@ -20,6 +20,7 @@ import se.torgammelgard.service.TeamService;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestConfig.class})
@@ -53,6 +54,7 @@ public class MatchServiceTest {
     }
 
     @Test
+    @Transactional               // to get lazy initialized fields
     public void findAll_TwoMatches_IterableLengthOfTwo() {
 
         Team team1 = new Team();
@@ -79,6 +81,8 @@ public class MatchServiceTest {
 
         matches = matchService.findAll();
         Assert.assertEquals("Matches found should be 1", 1, matches.size());
+
+        matches.get(0).getTennisSets().forEach(System.out::println);
 
     }
 
