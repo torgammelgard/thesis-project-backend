@@ -11,7 +11,8 @@ import java.util.List;
 @Entity
 @Table(name = "matches")
 @Data
-@NoArgsConstructor @RequiredArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class Match {
 
     @Id
@@ -25,17 +26,23 @@ public class Match {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team_1_id", foreignKey = @ForeignKey(name = "TEAM_1_ID_FK"))
-    @NonNull @Setter(AccessLevel.NONE)
+    @NonNull
+    @Setter(AccessLevel.NONE)
     @JsonView(Views.Public.class)
     private Team teamOne;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team_2_id", foreignKey = @ForeignKey(name = "TEAM_2_ID_FK"))
-    @NonNull @Setter(AccessLevel.NONE)
+    @NonNull
+    @Setter(AccessLevel.NONE)
     @JsonView(Views.Public.class)
     private Team teamTwo;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "matches", cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "match_tennisset",
+            joinColumns = {@JoinColumn(name = "match_id", referencedColumnName = "match_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tennisset_id", referencedColumnName = "tennisset_id")})
     private List<TennisSet> tennisSets = new ArrayList<>(0);
 
     public void setTeamOne(Team teamOne) {

@@ -24,8 +24,6 @@ public class TennisSetScore {
     @JsonView(Views.Public.class)
     private int setScoreTeamTwo;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "setscore_tennisset", joinColumns = {@JoinColumn(name = "setscore_id", nullable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "tennisset_id", nullable = false)})
+    @ManyToMany(mappedBy = "tennisSetScore", cascade = CascadeType.ALL)
     private Set<TennisSet> tennisSets = new HashSet<>(0);
 }
