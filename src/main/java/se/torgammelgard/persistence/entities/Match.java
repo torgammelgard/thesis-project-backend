@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "matches")
+@Table(name = "MATCHES")
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -18,7 +18,7 @@ public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonView(Views.Public.class)
-    private Long match_id;
+    private Long id;
 
     @NonNull
     @JsonView(Views.Public.class)
@@ -41,8 +41,8 @@ public class Match {
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "match_tennisset",
-            joinColumns = {@JoinColumn(name = "match_id", referencedColumnName = "match_id")},
-            inverseJoinColumns = {@JoinColumn(name = "tennisset_id", referencedColumnName = "tennisset_id")})
+            joinColumns = {@JoinColumn(name = "match_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")})
     private List<TennisSet> tennisSets = new ArrayList<>(0);
 
     public void setTeamOne(Team teamOne) {

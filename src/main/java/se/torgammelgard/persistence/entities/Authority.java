@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "authorities")
+@Table(name = "AUTHORITIES")
 @Data
 public class Authority {
 

@@ -21,7 +21,7 @@
   </thead>
   <tbody>
   <tr th:each="match : ${matches}">
-    <td th:text="${match.match_id}"></td>
+    <td th:text="${match.getId}"></td>
     <td th:text="${match.getName()}"></td>
     <td th:text="${match.getTeamOne().getTeamName()}"></td>
     <td th:text="${match.getTeamTwo().getTeamName()}"></td>

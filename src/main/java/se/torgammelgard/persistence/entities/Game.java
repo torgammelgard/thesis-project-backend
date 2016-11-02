@@ -10,7 +10,7 @@ import se.torgammelgard.Views;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "games")
+@Table(name = "GAMES")
 @Data
 @NoArgsConstructor @RequiredArgsConstructor
 public class Game {

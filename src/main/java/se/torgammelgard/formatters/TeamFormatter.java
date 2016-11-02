@@ -22,6 +22,6 @@ public class TeamFormatter implements Formatter<Team> {
 
     @Override
     public String print(Team team, Locale locale) {
-        return Long.toString(team.getTeam_id());
+        return Long.toString(team.getId());
     }
 }

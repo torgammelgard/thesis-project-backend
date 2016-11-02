@@ -11,20 +11,20 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "tennis_sets")
+@Table(name = "TENNISSETS")
 @Data
 public class TennisSet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonView(Views.Public.class)
-    private Long tennisset_id;
+    private Long id;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "tennisset_tennissetscore",
-            joinColumns = @JoinColumn(name = "tennisset_id", referencedColumnName = "tennisset_id"),
-            inverseJoinColumns = @JoinColumn(name = "setscore_id", referencedColumnName = "setscore_id"))
+            joinColumns = @JoinColumn(name = "tennisset_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tennissetscore_id", referencedColumnName = "id"))
     private List<TennisSetScore> tennisSetScore = new ArrayList<>(0);
 
     @ManyToMany(mappedBy = "tennisSets", cascade = {CascadeType.ALL})

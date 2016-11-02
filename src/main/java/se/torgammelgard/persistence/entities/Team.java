@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "teams")
+@Table(name = "TEAMS")
 @Data
 @ToString(exclude = {"team1_matches", "team2_matches"})
 @NoArgsConstructor @RequiredArgsConstructor @AllArgsConstructor
@@ -22,7 +22,7 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NonNull
     @JsonView(Views.Public.class)
-    private Long team_id;
+    private Long id;
 
     @NonNull
     @JsonView(Views.Public.class)

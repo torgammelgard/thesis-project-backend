@@ -9,14 +9,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "set_scores")
+@Table(name = "TENNISSETSCORES")
 @Data
 public class TennisSetScore {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonView(Views.Public.class)
-    private Long setscore_id;
+    private Long id;
 
     @JsonView(Views.Public.class)
     private int setScoreTeamOne;
