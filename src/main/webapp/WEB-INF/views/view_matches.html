@@ -4,29 +4,38 @@
   <title>View matches</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
           integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
           crossorigin="anonymous"></script>
   <link rel="stylesheet" th:href="@{/styles/main.css}">
 </head>
 <body>
+<div class="container">
+  <form action="#" th:action="@{/match/delete_page}" th:object="${matchTable}" method="post">
+    <table class="table table-hover">
+      <thead>
+      <th>#</th>
+      <th>Match name</th>
+      <th>Team 1 name</th>
+      <th>Team 2 name</th>
+      </thead>
+      <tbody>
 
-<table class="table table-striped table-hover">
-  <thead>
-  <th>#</th>
-  <th>Match name</th>
-  <th>Team 1 name</th>
-  <th>Team 2 name</th>
-  </thead>
-  <tbody>
-  <tr th:each="match : ${matches}">
-    <td th:text="${match.id}"></td>
-    <td th:text="${match.name}"></td>
-    <td th:text="${match.teamOne} ? ${match.teamOne.teamName}"></td>
-    <td th:text="${match.teamTwo} ? ${match.teamTwo.teamName}"></td>
-  </tr>
-  </tbody>
-</table>
+      <tr class="clickable-row" th:each="match : *{matches}">
+        <td><input type="checkbox" th:field="*{selectedMatches}" th:value="${match.id}"></td>
+        <td th:text="${match.id}">1</td>
+        <td th:text="${match.name}">Foo</td>
+        <td th:text="${match.teamOne} ? ${match.teamOne.teamName}">Team 1</td>
+        <td th:text="${match.teamTwo} ? ${match.teamTwo.teamName}">Team 2</td>
+      </tr>
+      </tbody>
+    </table>
 
+    <button id="deleteBtn" class="btn" type="submit" disabled>Delete</button>
+  </form>
+
+  <script th:src="@{/scripts/match_table.js}"></script>
+</div>
 </body>
 </html>

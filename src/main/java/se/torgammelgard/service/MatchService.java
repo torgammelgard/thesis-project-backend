@@ -43,4 +43,8 @@ public class MatchService {
     public void delete(long id) {
         matchRepository.delete(id);
     }
+
+    public void delete(Match match) {
+        matchRepository.delete(match);
+    }
 }
