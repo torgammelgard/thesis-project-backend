@@ -8,6 +8,7 @@ import se.torgammelgard.Views;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.service.TeamService;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Random;
 
@@ -26,9 +27,9 @@ public class TeamController {
 
     // TODO should be deleted later and replaced with POST
     @RequestMapping("/add")
-    public void addTeam() {
+    public void addTeam(Principal principal) {
         Team team = new Team();
         team.setTeamName(String.format("Team name with random number %d", new Random().nextInt(100)));
-        teamService.save(team);
+        teamService.save(team, principal);
     }
 }

@@ -24,6 +24,11 @@ public class Team {
     @JsonView(Views.Public.class)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "owner_user_id", foreignKey = @ForeignKey(name = "OWNER_USER_ID_FK"))
+    @JsonView(Views.Public.class)
+    private User owner;
+
     @NonNull
     @JsonView(Views.Public.class)
     private String teamName;

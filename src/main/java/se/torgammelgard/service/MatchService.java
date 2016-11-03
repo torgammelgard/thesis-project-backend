@@ -33,6 +33,8 @@ public class MatchService {
     }
 
     public Match save(Match match, Principal principal) {
+        if (principal == null)
+            return null;
         User user = userRepository.findByUsername(principal.getName());
         match.setOwner(user);
         return save(match);
