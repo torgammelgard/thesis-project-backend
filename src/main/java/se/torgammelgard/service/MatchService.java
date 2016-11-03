@@ -26,4 +26,7 @@ public class MatchService {
         return matchRepository.save(match);
     }
 
+    public void delete(long id) {
+        matchRepository.delete(id);
+    }
 }

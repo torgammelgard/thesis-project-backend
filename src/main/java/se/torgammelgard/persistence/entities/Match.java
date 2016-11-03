@@ -24,14 +24,14 @@ public class Match {
     @JsonView(Views.Public.class)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "team_1_id", foreignKey = @ForeignKey(name = "TEAM_1_ID_FK"))
     @NonNull
     @Setter(AccessLevel.NONE)
     @JsonView(Views.Public.class)
     private Team teamOne;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "team_2_id", foreignKey = @ForeignKey(name = "TEAM_2_ID_FK"))
     @NonNull
     @Setter(AccessLevel.NONE)

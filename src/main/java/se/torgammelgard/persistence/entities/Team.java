@@ -36,11 +36,11 @@ public class Team {
     @JsonView(Views.Public.class)
     private String playerTwoName;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamOne", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamOne", orphanRemoval = false)
     @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
     private List<Match> team1_matches = new ArrayList<>(0);
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamTwo", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamTwo", orphanRemoval = false)
     @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
     private List<Match> team2_matches = new ArrayList<>(0);
 
