@@ -1,13 +1,13 @@
 package se.torgammelgard.persistence.entities;
 
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "USERS")
 @Data
+@NoArgsConstructor @RequiredArgsConstructor @AllArgsConstructor
 public class User {
 
     @Id

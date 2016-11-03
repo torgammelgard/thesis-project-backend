@@ -8,6 +8,7 @@ import se.torgammelgard.Views;
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.service.MatchService;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -34,7 +35,7 @@ public class MatchController {
     @PostMapping
     public
     @ResponseBody
-    Match addMatch(@RequestBody Match match) {
-        return matchService.save(match);
+    Match addMatch(@RequestBody Match match, Principal principal) {
+        return matchService.save(match, principal);
     }
 }

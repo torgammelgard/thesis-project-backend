@@ -1,21 +1,25 @@
 package se.torgammelgard.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.persistence.entities.TennisSet;
 import se.torgammelgard.persistence.entities.TennisSetScore;
+import se.torgammelgard.persistence.entities.User;
+import se.torgammelgard.repository.UserRepository;
 import se.torgammelgard.service.MatchService;
 import se.torgammelgard.service.TeamService;
 import se.torgammelgard.service.TennisSetScoreService;
 import se.torgammelgard.service.TennisSetService;
 
+import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,9 @@ public class MatchPathController {
 
     @Autowired
     private TeamService teamService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private TennisSetScoreService tennisSetScoreService;
@@ -60,10 +67,17 @@ public class MatchPathController {
             @ModelAttribute Match match,
             @ModelAttribute TennisSetScore setscore,
             BindingResult bindingResult,
-            Model model) {
+            Model model,
+            HttpServletResponse response,
+            Principal principal) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
             return "error_page";
+        }
+
+        // Check if user is logged in (exists)
+        if (principal == null || userRepository.findByUsername(principal.getName()) == null) {
+            throw new UserNotFoundException();
         }
 
         List<TennisSetScore> tennisSetScores = new ArrayList<>(0);
@@ -72,23 +86,13 @@ public class MatchPathController {
         tennisSet.setTennisSetScore(tennisSetScores);
         List<TennisSet> tennisSets = new ArrayList<>(0);
         tennisSets.add(tennisSet);
-        //match.setTennisSets(tennisSets);
-        matchService.save(match);
-/*
-        setscore = tennisSetScoreService.save(setscore);
-        List<TennisSetScore> tennisSetScores = new ArrayList<>(0);
-        tennisSetScores.add(setscore);
-
-        TennisSet tennisSet = new TennisSet();
-        tennisSet.setTennisSetScore(tennisSetScores);
-        tennisSet = tennisSetService.save(tennisSet);
-
-        List<TennisSet> tennisSets = new ArrayList<>(0);
-        tennisSets.add(tennisSet);
         match.setTennisSets(tennisSets);
-        matchService.save(match);
-*/
+        matchService.save(match, principal);
 
         return "redirect:/api/match";
+    }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "No such User")
+    public class UserNotFoundException extends RuntimeException {
     }
 }

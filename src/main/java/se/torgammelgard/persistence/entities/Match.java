@@ -42,8 +42,13 @@ public class Match {
     @JoinTable(
             name = "match_tennisset",
             joinColumns = {@JoinColumn(name = "match_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")})
+            inverseJoinColumns = {@JoinColumn(name = "tennisset_id", referencedColumnName = "id")})
     private List<TennisSet> tennisSets = new ArrayList<>(0);
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "owner_user_id", foreignKey = @ForeignKey(name = "OWNER_USER_ID_FK"))
+    @JsonView(Views.Public.class)
+    private User owner;
 
     public void setTeamOne(Team teamOne) {
         this.teamOne = teamOne;
