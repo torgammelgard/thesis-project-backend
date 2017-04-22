@@ -62,7 +62,7 @@ dependencies {
 eclipse {
 	wtp {
 		component {
-			contextPath = 'cool'
+			contextPath = 'tennislogger'
 		}
 		
 		facet {
