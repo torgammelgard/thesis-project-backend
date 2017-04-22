@@ -7,6 +7,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.repository.TeamRepository;
 import se.torgammelgard.service.TeamService;
@@ -34,6 +36,7 @@ public class TeamServiceTest {
     // Naming convention
     // MethodName_StateUnderTest_ExpectedBehavior
     @Test
+    @Transactional
     public void findAll_TwoTeams_IterableLengthOfTwo() {
         Iterable<Team> allteams = teamService.findAll();
         int size = 0;

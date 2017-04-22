@@ -1,3 +1,9 @@
+# eclipse
+.classpath
+.project
+.settings/
+bin/
+
 # Created by .ignore support plugin (hsz.mobi)
 
 # Gradle output
