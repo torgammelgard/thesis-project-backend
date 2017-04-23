@@ -1,6 +1,8 @@
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
+  <meta charset='UTF-8'>
   <title>Thymeleaf test page</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -41,8 +43,8 @@
   </div>
 
 
-  <a class="btn btn-default btn-block" href="/match/view_matches_page" role="button">View matches</a>
-  <a class="btn btn-default btn-block" href="/match/add_form_page" role="button">Add match</a>
+  <a class="btn btn-default btn-block" href="/tennislogger/match/view_matches_page" role="button">View matches</a>
+  <a class="btn btn-default btn-block" href="/tennislogger/match/add_form_page" role="button">Add match</a>
 
   <span th:text="#{welcome.message}"></span><br/>
   <span th:text="${serverTime}"></span><br/>

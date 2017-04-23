@@ -68,7 +68,8 @@ public class JpaConfig {
         return dataSource;
     }
 
-    @Bean
+    @SuppressWarnings("serial")
+	@Bean
     public JpaTransactionManager transactionManager() {
         return new JpaTransactionManager() {{
             setEntityManagerFactory(entityManagerFactory().getObject());

@@ -40,8 +40,7 @@ public class TeamServiceTest {
     public void findAll_TwoTeams_IterableLengthOfTwo() {
         Iterable<Team> allteams = teamService.findAll();
         int size = 0;
-        for (Team t :
-                allteams) {
+        for (@SuppressWarnings("unused") Team t : allteams) {
             size++;
         }
         Assert.assertEquals("Teams should be of size 2", 2, size);

@@ -1,25 +1,27 @@
 package se.torgammelgard.web;
 
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.persistence.entities.TennisSet;
 import se.torgammelgard.persistence.entities.TennisSetScore;
 import se.torgammelgard.repository.UserRepository;
 import se.torgammelgard.service.MatchService;
 import se.torgammelgard.service.TeamService;
-import se.torgammelgard.service.TennisSetScoreService;
-import se.torgammelgard.service.TennisSetService;
-
-import javax.servlet.http.HttpServletResponse;
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/match")
@@ -31,12 +33,12 @@ public class MatchPathController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
+    /*@Autowired
     private TennisSetScoreService tennisSetScoreService;
 
     @Autowired
     private TennisSetService tennisSetService;
-
+*/
     @Autowired
     private MatchService matchService;
 
@@ -99,7 +101,8 @@ public class MatchPathController {
         return "redirect:/api/match";
     }
 
-    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "No such User")
+    @SuppressWarnings("serial")
+	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "No such User")
     public class UserNotFoundException extends RuntimeException {
     }
 }

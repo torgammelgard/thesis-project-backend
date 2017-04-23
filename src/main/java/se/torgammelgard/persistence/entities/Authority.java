@@ -21,7 +21,12 @@ public class Authority {
     @AllArgsConstructor @NoArgsConstructor
     static class AuthorityPK implements Serializable {
 
-        @NonNull
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = -1364734397652503953L;
+
+		@NonNull
         @JoinColumn(table = "users", referencedColumnName = "username")
         protected String user;
 

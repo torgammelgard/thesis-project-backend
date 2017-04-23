@@ -35,7 +35,7 @@ public class TeamService {
     public Team save(Team team, Principal principal) {
         if (team == null)
             return null;
-        User user = userRepository.findByUsername(principal.getName());
+        User user = userRepository.findByUsername(((User) principal).getUsername());
         team.setOwner(user);
         return save(team);
     }

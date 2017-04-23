@@ -34,7 +34,8 @@ public class PersistenceConfig {
         }};
     }
 
-    Properties hibernateProperties() {
+    @SuppressWarnings("serial")
+	Properties hibernateProperties() {
         return new Properties() {{
             //setProperty("hibernate.connection.driver_class", env.getProperty("jdbc.driverClassname"));
 

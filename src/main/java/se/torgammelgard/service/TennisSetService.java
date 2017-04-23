@@ -1,14 +1,14 @@
 package se.torgammelgard.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import se.torgammelgard.persistence.entities.TennisSet;
 import se.torgammelgard.repository.TennisSetRepository;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Service
 @Transactional

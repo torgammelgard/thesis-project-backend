@@ -1,4 +1,6 @@
-import config.TestConfig;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -7,20 +9,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import config.TestConfig;
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.persistence.entities.TennisSet;
 import se.torgammelgard.persistence.entities.TennisSetScore;
-import se.torgammelgard.repository.MatchRepository;
-import se.torgammelgard.repository.TeamRepository;
 import se.torgammelgard.service.MatchService;
-import se.torgammelgard.service.TeamService;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Consumer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestConfig.class})
@@ -37,14 +33,14 @@ public class MatchServiceTest {
     @Autowired
     private MatchService matchService;
 
-    @Autowired
-    private MatchRepository matchRepository;
+//    @Autowired
+//    private MatchRepository matchRepository;
 
-    @Autowired
-    private TeamService teamService;
+//    @Autowired
+//    private TeamService teamService;
 
-    @Autowired
-    private TeamRepository teamRepository;
+//    @Autowired
+//    private TeamRepository teamRepository;
 
 //    @PersistenceContext
 //    private EntityManager entityManager;
@@ -63,7 +59,7 @@ public class MatchServiceTest {
         team2.setTeamName("Second Team");
 
         TennisSet tennisSet1 = new TennisSet();
-        TennisSet tennisSet2 = new TennisSet();
+        //TennisSet tennisSet2 = new TennisSet();
         TennisSetScore tennisSetScore = new TennisSetScore();
         tennisSetScore.setSetScoreTeamOne(4);
         tennisSetScore.setSetScoreTeamTwo(6);
@@ -86,7 +82,7 @@ public class MatchServiceTest {
 
     @After
     public void tearDown() {
-        List<Team> teams = teamService.findAll();
+        //List<Team> teams = teamService.findAll();
     }
 
 }
