@@ -24,5 +24,5 @@ public class GameController {
         List<Game> games = gameService.findAll();
         return games;
     }
-
+    
 }

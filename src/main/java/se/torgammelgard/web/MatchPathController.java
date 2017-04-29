@@ -67,7 +67,7 @@ public class MatchPathController {
     public String addMatch(Model model) {
         model.addAttribute("setscore", new TennisSetScore());
         model.addAttribute("match", new Match());
-        model.addAttribute("teams", teamService.findAll());
+        model.addAttribute("teams", teamService.findAll()); // TODO handle what to do if < 2 teams
         return "add_match";
     }
 

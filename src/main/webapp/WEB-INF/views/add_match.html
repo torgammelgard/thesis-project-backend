@@ -17,13 +17,15 @@
 <div class="container">
   <h1>Add a match page!</h1>
 
+  <!--/*@thymesVar id="match" type="se.torgammelgard.persistence.entities.Match"*/-->
   <form class="form-horizontal" action="#" th:action="@{/match/save}" th:object="${match}" method="post">
 
     <div class="form-group">
       <label for="name" th:text="#{addmatchform.name}"></label>
       <input id="name" class="form-control" type="text" th:field="*{name}" />
     </div>
-
+    
+    <!--/*@thymesVar id="team" type="se.torgammelgard.persistence.entities.Team"*/-->
     <div class="form-group">
       <label for="teamoneselect" th:text="#{addmatchform.teamone}"></label>
       <select id="teamoneselect" class="form-control" th:field="*{teamOne}">
@@ -37,10 +39,11 @@
         <option th:each="team : ${teams}" th:value="${{team}}" th:text="${team.getTeamName()}"></option>
       </select>
     </div>
+    
     <!--/*@thymesVar id="setscore" type="se.torgammelgard.persistence.entities.TennisSetScore"*/-->
     <div class="form-group" th:object="${setscore}">
-      <input type="number" class="form-control" th:field="*{setScoreTeamOne}"/>
-      <input type="number" class="form-control" th:field="*{setScoreTeamTwo}"/>
+      <input type="number" class="form-control" th:field="*{scoreTeamOne}"/>
+      <input type="number" class="form-control" th:field="*{scoreTeamTwo}"/>
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
   </form>

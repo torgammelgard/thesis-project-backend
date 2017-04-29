@@ -6,6 +6,8 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,9 +36,16 @@ public class TeamController {
         return teamService.findAll();
     }
 
+    @PostMapping
+    @JsonView(Views.Public.class)
+    public @ResponseBody Team addTeam(@RequestBody Team team) {
+    	//team.setOwner(userRepo.findByUsername("tor"));
+    	return teamService.save(team);
+    }
+    
     // TODO should be deleted later and replaced with POST
     @RequestMapping("/add")
-    public void addTeam(Principal principal) {
+    public void addRandomTeam(Principal principal) {
         Team team = new Team();
         team.setTeamName(String.format("Team name with random number %d", new Random().nextInt(100)));
         User user_1 = userRepo.getOne(0L);

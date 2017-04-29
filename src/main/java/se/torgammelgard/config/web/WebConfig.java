@@ -57,7 +57,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ServletContext
     public void addFormatters(FormatterRegistry registry) {
 
         registry.addFormatter(teamFormatter());
-        //registry.addFormatter(tennisSetScoreFormatter());
+        registry.addFormatter(tennisSetScoreFormatter());
     }
 
     @Bean

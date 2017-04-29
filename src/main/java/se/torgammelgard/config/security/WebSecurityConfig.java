@@ -18,8 +18,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                //.anyRequest().permitAll() // TODO change this
-                .anyRequest().authenticated()
+                .anyRequest().permitAll() // TODO change this
+                //.antMatchers("**/api/team").permitAll()
+                //.anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .and()

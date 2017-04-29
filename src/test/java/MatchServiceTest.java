@@ -61,8 +61,8 @@ public class MatchServiceTest {
         TennisSet tennisSet1 = new TennisSet();
         //TennisSet tennisSet2 = new TennisSet();
         TennisSetScore tennisSetScore = new TennisSetScore();
-        tennisSetScore.setSetScoreTeamOne(4);
-        tennisSetScore.setSetScoreTeamTwo(6);
+        tennisSetScore.setScoreTeamOne(4);
+        tennisSetScore.setScoreTeamTwo(6);
         tennisSet1.setTennisSetScore(Arrays.asList(tennisSetScore));
 
         List<Match> matches = matchService.findAll();

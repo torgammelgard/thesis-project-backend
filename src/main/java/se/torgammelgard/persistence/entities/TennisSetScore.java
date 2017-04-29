@@ -19,10 +19,10 @@ public class TennisSetScore {
     private Long id;
 
     @JsonView(Views.Public.class)
-    private int setScoreTeamOne;
+    private int scoreTeamOne;
 
     @JsonView(Views.Public.class)
-    private int setScoreTeamTwo;
+    private int scoreTeamTwo;
 
     @ManyToMany(mappedBy = "tennisSetScore", cascade = CascadeType.ALL)
     private Set<TennisSet> tennisSets = new HashSet<>(0);
