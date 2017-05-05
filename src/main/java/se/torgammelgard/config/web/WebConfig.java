@@ -1,11 +1,18 @@
 package se.torgammelgard.config.web;
 
 
+import java.util.List;
+
+import javax.servlet.ServletContext;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.context.request.WebRequestInterceptor;
@@ -17,10 +24,8 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-import se.torgammelgard.formatters.TeamFormatter;
-import se.torgammelgard.formatters.TennisSetScoreFormatter;
 
-import javax.servlet.ServletContext;
+import se.torgammelgard.formatters.TennisSetScoreFormatter;
 
 @Configuration
 @ComponentScan({"se.torgammelgard.web", "se.torgammelgard.api"})
@@ -29,12 +34,19 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ServletContext
 
     private ServletContext servletContext;
 
-    @Bean
-    public TeamFormatter teamFormatter() {
-        return new TeamFormatter();
-    }
+//    @Bean
+//    public TeamFormatter teamFormatter() {
+//        return new TeamFormatter();
+//    }
 
-    @Bean
+    @Override
+	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+    	
+    	converters.add(new MappingJackson2HttpMessageConverter());
+		super.configureMessageConverters(converters);
+	}
+
+	@Bean
     public TennisSetScoreFormatter tennisSetScoreFormatter() {return new TennisSetScoreFormatter();}
 
     @Bean
@@ -56,7 +68,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ServletContext
     @Override
     public void addFormatters(FormatterRegistry registry) {
 
-        registry.addFormatter(teamFormatter());
+        //registry.addFormatter(teamFormatter());
         registry.addFormatter(tennisSetScoreFormatter());
     }
 

@@ -11,7 +11,7 @@ import se.torgammelgard.service.GameService;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/game")
+@RequestMapping("api/game")
 public class GameController {
 
     @Autowired

@@ -1,5 +1,6 @@
 package se.torgammelgard.persistence.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +33,11 @@ import se.torgammelgard.Views;
 @Data
 @ToString(exclude = {"team1_matches", "team2_matches"})
 @NoArgsConstructor @RequiredArgsConstructor @AllArgsConstructor
-public class Team {
+public class Team implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NonNull
     @JsonView(Views.Public.class)

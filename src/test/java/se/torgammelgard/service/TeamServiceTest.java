@@ -1,3 +1,4 @@
+package se.torgammelgard.service;
 import config.TestConfig;
 import org.junit.After;
 import org.junit.Assert;

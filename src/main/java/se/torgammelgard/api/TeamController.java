@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import se.torgammelgard.Views;
+import se.torgammelgard.persistence.entities.JunkEntity;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.persistence.entities.User;
 import se.torgammelgard.repository.UserRepository;
@@ -36,12 +39,22 @@ public class TeamController {
         return teamService.findAll();
     }
 
-    @PostMapping
-    @JsonView(Views.Public.class)
-    public @ResponseBody Team addTeam(@RequestBody Team team) {
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    //@JsonView(Views.Public.class)
+    public @ResponseBody String addTeam(@RequestBody Team team) {
     	//team.setOwner(userRepo.findByUsername("tor"));
-    	return teamService.save(team);
+    	//request.getSession().setAttribute("team", new Team());
+    	//Team persistent_team = teamService.save(team);
+    	return "OK";
     }
+    
+    
+    @PostMapping(value = "/junk", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    //@JsonView(Views.Public.class)
+    public @ResponseBody JunkEntity addTeam(@RequestBody JunkEntity junk) {
+    	return junk;
+    }
+    
     
     // TODO should be deleted later and replaced with POST
     @RequestMapping("/add")
@@ -52,4 +65,18 @@ public class TeamController {
         team.setOwner(user_1);
         teamService.save(team, principal);
     }
+    
+	@ExceptionHandler
+	public @ResponseBody String exHandle(Exception e) {
+		return e.getCause().getMessage();
+	}
+	
+//    @ExceptionHandler(Exception.class)
+//    public ModelAndView handleErrors(HttpServletRequest req, Exception ex) {
+//    	ModelAndView mav = new ModelAndView();
+//    	mav.addObject("exception", ex);
+//    	mav.addObject("url", req.getRequestURL());
+//    	mav.setViewName("error");
+//    	return mav;
+//    }
 }
