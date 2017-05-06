@@ -25,4 +25,9 @@ public class GameController {
         return games;
     }
     
+    @PostMapping
+    @JsonView(Views.Public.class)
+    public @ResponseBody Game saveGame(@RequestBody Game game) {
+    	return gameService.save(game);
+    }
 }

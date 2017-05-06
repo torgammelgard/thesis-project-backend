@@ -1,39 +1,19 @@
 package se.torgammelgard.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import se.torgammelgard.persistence.entities.Game;
-import se.torgammelgard.repository.GameRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import se.torgammelgard.persistence.entities.Game;
 
 @Service
 @Transactional
-public class GameService {
+public interface GameService {
 
-    private GameRepository gameRepository;
+    public List<Game> findAll();
 
-    @Autowired
-    public GameService(GameRepository gameRepository) {
-        this.gameRepository = gameRepository;
-    }
+    public Game save(Game game);
 
-    public List<Game> findAll() {
-        ArrayList<Game> games = new ArrayList<>();
-        Iterable<Game> itGames= gameRepository.findAll();
-        for (Game g : itGames) {
-            games.add(g);
-        }
-        return games;
-    }
-
-    public Game saveGame(Game game) {
-        return gameRepository.save(game);
-    }
-
-    public void removeGame(Game game) {
-        gameRepository.delete(game);
-    }
+    public void remove(Game game);
 }

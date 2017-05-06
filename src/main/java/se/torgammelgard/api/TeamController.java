@@ -19,8 +19,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import se.torgammelgard.Views;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.persistence.entities.User;
-import se.torgammelgard.repository.UserRepository;
 import se.torgammelgard.service.TeamService;
+import se.torgammelgard.service.UserService;
 
 @Controller
 @RequestMapping("/api/team")
@@ -30,7 +30,7 @@ public class TeamController {
     private TeamService teamService;
 
     @Autowired
-    private UserRepository userRepo;
+    private UserService userService;
     
     @GetMapping
     @JsonView(Views.Public.class)
@@ -44,7 +44,7 @@ public class TeamController {
     	Team t = null;
     	if (team.getOwner() != null) {
     		User owner = team.getOwner();
-    		User existing_user = userRepo.findByUsername(owner.getUsername());
+    		User existing_user = userService.findByUsername(owner.getUsername());
     		if (existing_user != null) {
     			team.setOwner(existing_user);
     			t = teamService.save(team);
@@ -58,22 +58,11 @@ public class TeamController {
     public void addRandomTeam(Principal principal) {
         Team team = new Team();
         team.setTeamName(String.format("Team name with random number %d", new Random().nextInt(100)));
-        //User user_1 = userRepo.getOne(0L);
-        //team.setOwner(user_1);
         teamService.save(team, principal);
     }
     
 	@ExceptionHandler
 	public @ResponseBody String exHandle(Exception e) {
-		return e.getCause().getMessage() + " O lala";
+		return e.getCause().getMessage();
 	}
-	
-//    @ExceptionHandler(Exception.class)
-//    public ModelAndView handleErrors(HttpServletRequest req, Exception ex) {
-//    	ModelAndView mav = new ModelAndView();
-//    	mav.addObject("exception", ex);
-//    	mav.addObject("url", req.getRequestURL());
-//    	mav.setViewName("error");
-//    	return mav;
-//    }
 }

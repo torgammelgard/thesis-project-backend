@@ -15,12 +15,10 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import lombok.Data;
 import se.torgammelgard.Views;
 
 @Entity
 @Table(name = "TENNISSETS")
-@Data
 public class TennisSet {
 
     @Id
@@ -37,4 +35,31 @@ public class TennisSet {
 
     @ManyToMany(mappedBy = "tennisSets", cascade = {CascadeType.ALL})
     private List<Match> matches = new ArrayList<>(0);
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<TennisSetScore> getTennisSetScore() {
+		return tennisSetScore;
+	}
+
+	public void setTennisSetScore(List<TennisSetScore> tennisSetScore) {
+		this.tennisSetScore = tennisSetScore;
+	}
+
+	public List<Match> getMatches() {
+		return matches;
+	}
+
+	public void setMatches(List<Match> matches) {
+		this.matches = matches;
+	}
+
+	public TennisSet() {
+	}
 }
