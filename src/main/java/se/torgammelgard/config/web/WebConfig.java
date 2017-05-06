@@ -11,8 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.context.request.WebRequestInterceptor;
@@ -42,7 +40,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ServletContext
     @Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
     	
-    	converters.add(new MappingJackson2HttpMessageConverter());
+    	//converters.add(new MappingJackson2HttpMessageConverter()); // Not needed? maybe default
 		super.configureMessageConverters(converters);
 	}
 

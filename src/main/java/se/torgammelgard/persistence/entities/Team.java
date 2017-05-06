@@ -17,29 +17,17 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 import se.torgammelgard.Views;
 
 @Entity
 @Table(name = "TEAMS")
-@Data
-@ToString(exclude = {"team1_matches", "team2_matches"})
-@NoArgsConstructor @RequiredArgsConstructor @AllArgsConstructor
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 			// not sure if needed
 public class Team implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 146345634234L;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NonNull
     @JsonView(Views.Public.class)
     private Long id;
 
@@ -48,24 +36,19 @@ public class Team implements Serializable {
     @JsonView(Views.Public.class)
     private User owner;
 
-    @NonNull
     @JsonView(Views.Public.class)
     private String teamName;
 
-    @NonNull
     @JsonView(Views.Public.class)
     private String playerOneName;
 
-    @NonNull
     @JsonView(Views.Public.class)
     private String playerTwoName;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamOne", orphanRemoval = false)
-    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
     private List<Match> team1_matches = new ArrayList<>(0);
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamTwo", orphanRemoval = false)
-    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
     private List<Match> team2_matches = new ArrayList<>(0);
 
     public List<Match> getTeam1_matches() {
@@ -95,4 +78,63 @@ public class Team implements Serializable {
         match.setTeamTwo(null);
     }
 
+	public void setTeam1_matches(List<Match> team1_matches) {
+		this.team1_matches = team1_matches;
+	}
+
+	public void setTeam2_matches(List<Match> team2_matches) {
+		this.team2_matches = team2_matches;
+	}
+
+	public Team() {
+		super();
+	}
+
+	public Team(Long id, String teamName, String playerOneName, String playerTwoName) {
+		super();
+		this.id = id;
+		this.teamName = teamName;
+		this.playerOneName = playerOneName;
+		this.playerTwoName = playerTwoName;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
+	public String getTeamName() {
+		return teamName;
+	}
+
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+
+	public String getPlayerOneName() {
+		return playerOneName;
+	}
+
+	public void setPlayerOneName(String playerOneName) {
+		this.playerOneName = playerOneName;
+	}
+
+	public String getPlayerTwoName() {
+		return playerTwoName;
+	}
+
+	public void setPlayerTwoName(String playerTwoName) {
+		this.playerTwoName = playerTwoName;
+	}
 }

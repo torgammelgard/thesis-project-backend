@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
+//@Transactional
 public class TeamService {
 
     @Autowired
@@ -22,16 +22,19 @@ public class TeamService {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional
     public List<Team> findAll() {
         List<Team> teams = new ArrayList<>(0);
         teamRepository.findAll().forEach(teams::add);
         return teams;
     }
 
+    @Transactional
     public Team save(Team team) {
         return teamRepository.save(team);
     }
 
+    @Transactional
     public Team save(Team team, Principal principal) {
         if (team == null)
             return null;
@@ -40,6 +43,7 @@ public class TeamService {
         return save(team);
     }
 
+    @Transactional
     public Team find(Long id) {
         return teamRepository.findOne(id);
     }

@@ -9,9 +9,11 @@ version "1.0"
 war {
     archiveName "thesis.war"
 }
+
 repositories {
     mavenCentral()
 }
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -58,6 +60,15 @@ dependencies {
     // Lombok
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.10'
 
+}
+
+/* Reorder the Web App libraries to the bottom - fixes the 'no source attached' problem */
+eclipse.classpath.file {
+    withXml { xml ->
+        def node = xml.asNode()
+        node.remove( node.find { it.@path == 'org.eclipse.jst.j2ee.internal.web.container' } )
+        node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.web.container', exported: 'true'])
+    }
 }
 
 eclipse {

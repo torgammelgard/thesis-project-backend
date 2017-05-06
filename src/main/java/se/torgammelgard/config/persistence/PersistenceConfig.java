@@ -14,7 +14,8 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("se.torgammelgard.persistence.entities")
+//@ComponentScan("se.torgammelgard.persistence.entities")
+@ComponentScan("se.torgammelgard.service")
 @PropertySource("classpath:persistence-hibernate.properties")
 public class PersistenceConfig {
 
