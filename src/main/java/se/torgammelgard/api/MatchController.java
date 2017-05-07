@@ -35,16 +35,13 @@ public class MatchController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @JsonView(Views.Public.class)
-    public
-    @ResponseBody
-    List<Match> getAllMatches() {
+    public @ResponseBody List<Match> getAllMatches() {
         return matchService.findAll();
     }
 
     @PostMapping
-    public
-    @ResponseBody
-    Match addMatch(@RequestBody Match match, Principal principal) {
+    @JsonView(Views.Public.class)
+    public @ResponseBody Match addMatch(@RequestBody Match match, Principal principal) {
         return matchService.save(match, principal);
     }
 }

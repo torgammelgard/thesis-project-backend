@@ -87,7 +87,6 @@ public class Team implements Serializable {
 	}
 
 	public Team() {
-		super();
 	}
 
 	public Team(Long id, String teamName, String playerOneName, String playerTwoName) {
@@ -136,5 +135,10 @@ public class Team implements Serializable {
 
 	public void setPlayerTwoName(String playerTwoName) {
 		this.playerTwoName = playerTwoName;
+	}
+
+	@Override
+	public String toString() {
+		return "Team [teamName=" + teamName + "]";
 	}
 }

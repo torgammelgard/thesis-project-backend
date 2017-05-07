@@ -28,16 +28,16 @@ public class User implements Serializable {
     @Column(nullable = false, unique = true)
     @JsonView(Views.Public.class)
     private String username;
-
+    
     private String password;
 
     private Boolean enabled;
 
     @OneToMany(mappedBy = "owner")
+    @JsonView(Views.Internal.class)
     private List<Team> teams;
 
 	public User() {
-		super();
 	}
 
 	public Long getId() {

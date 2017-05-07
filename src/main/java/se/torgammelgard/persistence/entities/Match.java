@@ -1,7 +1,7 @@
 package se.torgammelgard.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.*;
+
 import se.torgammelgard.Views;
 
 import javax.persistence.*;
@@ -10,32 +10,23 @@ import java.util.List;
 
 @Entity
 @Table(name = "MATCHES")
-@Data
-@NoArgsConstructor
-@RequiredArgsConstructor
-@AllArgsConstructor
 public class Match {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     @JsonView(Views.Public.class)
     private Long id;
 
-    @NonNull
     @JsonView(Views.Public.class)
     private String name;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "team_1_id", foreignKey = @ForeignKey(name = "TEAM_1_ID_FK"))
-    @NonNull
-    @Setter(AccessLevel.NONE)
     @JsonView(Views.Public.class)
     private Team teamOne;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "team_2_id", foreignKey = @ForeignKey(name = "TEAM_2_ID_FK"))
-    @NonNull
-    @Setter(AccessLevel.NONE)
     @JsonView(Views.Public.class)
     private Team teamTwo;
 
@@ -44,6 +35,7 @@ public class Match {
             name = "match_tennisset",
             joinColumns = {@JoinColumn(name = "match_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "tennisset_id", referencedColumnName = "id")})
+    @JsonView(Views.Public.class)
     private List<TennisSet> tennisSets = new ArrayList<>(0);
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
@@ -60,4 +52,44 @@ public class Match {
         this.teamTwo = teamTwo;
         teamOne.addTeam2_match(this);
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<TennisSet> getTennisSets() {
+		return tennisSets;
+	}
+
+	public void setTennisSets(List<TennisSet> tennisSets) {
+		this.tennisSets = tennisSets;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
+	public Team getTeamOne() {
+		return teamOne;
+	}
+
+	public Team getTeamTwo() {
+		return teamTwo;
+	}
 }

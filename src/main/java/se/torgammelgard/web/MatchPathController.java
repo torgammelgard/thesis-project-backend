@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -19,9 +21,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.persistence.entities.TennisSet;
 import se.torgammelgard.persistence.entities.TennisSetScore;
-import se.torgammelgard.repository.UserRepository;
+import se.torgammelgard.persistence.entities.User;
 import se.torgammelgard.service.MatchService;
 import se.torgammelgard.service.TeamService;
+import se.torgammelgard.service.UserService;
 
 @Controller
 @RequestMapping("/match")
@@ -31,7 +34,7 @@ public class MatchPathController {
     private TeamService teamService;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     /*@Autowired
     private TennisSetScoreService tennisSetScoreService;
@@ -71,7 +74,7 @@ public class MatchPathController {
         return "add_match";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @PostMapping(value = "/save", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public String matchmng(
             @ModelAttribute Match match,
             @ModelAttribute TennisSetScore setscore,
@@ -85,7 +88,8 @@ public class MatchPathController {
         }
 
         // Check if user is logged in (exists)
-        if (principal == null || userRepository.findByUsername(principal.getName()) == null) {
+        User user = userService.findByUsername(principal.getName());
+        if (principal == null || user == null) {
             throw new UserNotFoundException();
         }
 
@@ -104,5 +108,6 @@ public class MatchPathController {
     @SuppressWarnings("serial")
 	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "No such User")
     public class UserNotFoundException extends RuntimeException {
+    	// TODO maybe send to nice page instead
     }
 }

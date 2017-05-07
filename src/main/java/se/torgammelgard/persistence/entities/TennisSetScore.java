@@ -1,7 +1,6 @@
 package se.torgammelgard.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.Data;
 import se.torgammelgard.Views;
 
 import javax.persistence.*;
@@ -10,7 +9,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "TENNISSETSCORES")
-@Data
 public class TennisSetScore {
 
     @Id
@@ -26,4 +24,39 @@ public class TennisSetScore {
 
     @ManyToMany(mappedBy = "tennisSetScore", cascade = CascadeType.ALL)
     private Set<TennisSet> tennisSets = new HashSet<>(0);
+
+	public TennisSetScore() {
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public int getScoreTeamOne() {
+		return scoreTeamOne;
+	}
+
+	public void setScoreTeamOne(int scoreTeamOne) {
+		this.scoreTeamOne = scoreTeamOne;
+	}
+
+	public int getScoreTeamTwo() {
+		return scoreTeamTwo;
+	}
+
+	public void setScoreTeamTwo(int scoreTeamTwo) {
+		this.scoreTeamTwo = scoreTeamTwo;
+	}
+
+	public Set<TennisSet> getTennisSets() {
+		return tennisSets;
+	}
+
+	public void setTennisSets(Set<TennisSet> tennisSets) {
+		this.tennisSets = tennisSets;
+	}
 }

@@ -23,6 +23,7 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+import se.torgammelgard.formatters.TeamFormatter;
 import se.torgammelgard.formatters.TennisSetScoreFormatter;
 
 @Configuration
@@ -32,10 +33,10 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ServletContext
 
     private ServletContext servletContext;
 
-//    @Bean
-//    public TeamFormatter teamFormatter() {
-//        return new TeamFormatter();
-//    }
+    @Bean
+    public TeamFormatter teamFormatter() {
+        return new TeamFormatter();
+    }
 
     @Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -66,7 +67,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ServletContext
     @Override
     public void addFormatters(FormatterRegistry registry) {
 
-        //registry.addFormatter(teamFormatter());
+        registry.addFormatter(teamFormatter());
         registry.addFormatter(tennisSetScoreFormatter());
     }
 
