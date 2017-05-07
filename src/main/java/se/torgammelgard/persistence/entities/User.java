@@ -1,6 +1,7 @@
 package se.torgammelgard.persistence.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -37,6 +41,14 @@ public class User implements Serializable {
     @JsonView(Views.Internal.class)
     private List<Team> teams;
 
+    @ManyToMany
+    @JoinTable(
+    		name = "user_roles", 
+    		joinColumns = @JoinColumn(referencedColumnName = "id"), 
+    		inverseJoinColumns = @JoinColumn(referencedColumnName = "id")
+    )
+    private Collection<Role> roles;
+    
 	public User() {
 	}
 
@@ -64,7 +76,7 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public Boolean getEnabled() {
+	public Boolean isEnabled() {
 		return enabled;
 	}
 
@@ -78,5 +90,13 @@ public class User implements Serializable {
 
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
+	}
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
 	}
 }

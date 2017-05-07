@@ -3,8 +3,8 @@ package se.torgammelgard.persistence.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "AUTHORITIES")
+//@Entity
+//@Table(name = "AUTHORITIES")
 public class Authority {
 
     @EmbeddedId
