@@ -1,37 +1,43 @@
 package se.torgammelgard.persistence.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "AUTHORITIES")
-@Data
 public class Authority {
 
     @EmbeddedId
     private AuthorityPK authorityPK;
 
     @Embeddable
-    @Data
-    @AllArgsConstructor @NoArgsConstructor
     static class AuthorityPK implements Serializable {
 
-        /**
-		 * 
-		 */
 		private static final long serialVersionUID = -1364734397652503953L;
 
-		@NonNull
         @JoinColumn(table = "users", referencedColumnName = "username")
         protected String user;
 
-        @NonNull
         protected String authority;
+
+		public AuthorityPK() {
+		}
+
+		public String getUser() {
+			return user;
+		}
+
+		public void setUser(String user) {
+			this.user = user;
+		}
+
+		public String getAuthority() {
+			return authority;
+		}
+
+		public void setAuthority(String authority) {
+			this.authority = authority;
+		}
 
     }
 }

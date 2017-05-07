@@ -2,63 +2,51 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset='UTF-8'>
-  <title>Thymeleaf test page</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-          crossorigin="anonymous"></script>
-  <link rel="stylesheet" th:href="@{/styles/main.css}">
-  <link rel="stylesheet" th:href="@{/styles/starter-template.css}">
+<meta charset='UTF-8'>
+<title>Main page</title>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+</head>
+<link rel="stylesheet" th:href="@{/styles/main.css}">
+<link rel="stylesheet" th:href="@{/styles/starter-template.css}">
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-              aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#" th:text="#{project.name}"></a>
-    </div>
-    <div id="navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</nav>
+	<div th:replace="fragments/header :: header"></div>
+	
+	<div class="container">
 
-<div class="container">
-
-  <div class="starter-template">
-    <h1>Tennis logger</h1>
-    <p class="lead">Use this app to log your tennis matches. <br>Track your results and analyze your progress.</p>
-  </div>
+		<div class="starter-template">
+			<h1>Tennis logger</h1>
+			<p class="lead">
+				Use this app to log your tennis matches. <br>Track your results
+				and analyze your progress.
+			</p>
+		</div>
 
 
-  <a class="btn btn-default btn-block" href="/tennislogger/match/view_matches_page" role="button">View matches</a>
-  <a class="btn btn-default btn-block" href="/tennislogger/match/add_form_page" role="button">Add match</a>
+		<a class="btn btn-default btn-block"
+			href="/tennislogger/match/view_matches_page" role="button">View
+			matches</a> <a class="btn btn-default btn-block"
+			href="/tennislogger/match/add_form_page" role="button">Add match</a>
 
-  <span th:text="#{welcome.message}"></span><br/>
-  <span th:text="${serverTime}"></span><br/>
-  <img th:src="@{/images/tennisball.png}">
+		<span th:text="#{welcome.message}"></span>
+		<br />
+		<span
+			th:text="${serverTime}"></span>
+		<br />
+		<img th:src="@{/images/tennisball.png}">
+	</div>
 
-  <div class="panel-footer">
-    <div id="about" th:text="#{index.about}"></div>
-    <div id="contact">Contact <a href=mailto:tor.gammelgard@gmail.com>Tor Gammelgård</a></div>
-  </div>
-</div>
-
-
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
-
-
+	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

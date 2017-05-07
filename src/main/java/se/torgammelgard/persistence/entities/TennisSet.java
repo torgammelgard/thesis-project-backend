@@ -21,10 +21,13 @@ import se.torgammelgard.Views;
 public class TennisSet {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     @JsonView(Views.Public.class)
     private Long id;
 
+    @JsonView(Views.Public.class)
+    private Long length;
+    
     @JsonView(Views.Public.class)
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -61,6 +64,14 @@ public class TennisSet {
 
 	public void setMatches(List<Match> matches) {
 		this.matches = matches;
+	}
+
+	public Long getLength() {
+		return length;
+	}
+
+	public void setLength(Long length) {
+		this.length = length;
 	}
 
 }

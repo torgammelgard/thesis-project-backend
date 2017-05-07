@@ -20,6 +20,9 @@ public class Match {
     @JsonView(Views.Public.class)
     private String name;
 
+    @JsonView(Views.Public.class)
+    private Boolean finished;
+    
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "team_1_id", foreignKey = @ForeignKey(name = "TEAM_1_ID_FK"))
     @JsonView(Views.Public.class)
@@ -91,5 +94,13 @@ public class Match {
 
 	public Team getTeamTwo() {
 		return teamTwo;
+	}
+
+	public Boolean isFinished() {
+		return finished;
+	}
+
+	public void setFinished(Boolean finished) {
+		this.finished = finished;
 	}
 }

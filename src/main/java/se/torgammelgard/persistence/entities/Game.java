@@ -1,5 +1,7 @@
 package se.torgammelgard.persistence.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +15,7 @@ import se.torgammelgard.Views;
 
 @Entity
 @Table(name = "GAMES")
-public class Game {
+public class Game implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,8 +52,11 @@ public class Game {
 		this.version = version;
 	}
 
+	public Game() {
+		
+	}
+	
 	public Game(String name) {
-		super();
 		this.name = name;
 	}
 }
