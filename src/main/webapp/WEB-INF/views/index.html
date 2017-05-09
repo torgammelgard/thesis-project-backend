@@ -16,7 +16,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
-</head>
 <link rel="stylesheet" th:href="@{/styles/main.css}">
 <link rel="stylesheet" th:href="@{/styles/starter-template.css}">
 </head>
@@ -27,6 +26,7 @@
 
 		<div class="starter-template">
 			<h1>Tennis logger</h1>
+			<span th:text="${msg != null ? 'Welcome new user' : 'Old user'}"></span>
 			<p class="lead">
 				Use this app to log your tennis matches. <br>Track your results
 				and analyze your progress.

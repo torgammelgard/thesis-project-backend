@@ -47,4 +47,8 @@ public class Privilege implements Serializable {
 
 	public Privilege() {
 	}
+
+	public Privilege(String name) {
+		this.name = name;
+	}
 }

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset='UTF-8'>
+<title>Main page</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/styles/main.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/starter-template.css}">
+</head>
+<body>
+
+	<div th:replace="fragments/header :: header"></div>
+	
+	<span th:text="${error != null ? 'Errors exist' : 'error == null'}"></span>
+	<span th:text="${logout != null ? 'You are logged out' : 'null'}"></span>
+	
+	<div th:if="${error}" class="alert alert-danger" role="alert">
+		<p>Wrong user or password</p>
+	</div>
+	<div th:if="${logout}" class="alert alert-info" role="alert">
+		<p>Logged out</p>
+	</div>
+	
+	
+	<div class="container">
+	
+		<!-- LOGIN -->
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<strong>Login</strong>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form class="form" th:action="@{/login}" method="post">
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12">
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"><span
+												class="glyphicon glyphicon-user" aria-hidden="true"></span>
+											</span> 
+											<input
+												type="text" class="form-control" name="username"
+												id="loginUsername" placeholder="Username">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12">
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"><span
+												class="glyphicon glyphicon-lock"></span>
+											</span>
+											<input
+												type="password" class="form-control" name="password"
+												id="loginPassword" placeholder="Password"> <span
+												class="input-group-btn">
+												<button class="btn btn-default" type="submit">Go!</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<!-- REGISTER NEW ACCOUNT -->
+		
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h1 class="panel-title">Create new account</h1>
+					</div>
+					<div class="panel-body">
+						<form class="form" th:action="@{/register}" method="post">
+							<div class="row">
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<div class="form-group">
+										<input type="text" class="form-control" name="firstName" id="registerFirstName" placeholder="First name">
+									</div>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<div class="form-group">
+										<input type="text" class="form-control" name="lastName" id="registerLastName" placeholder="Last name">
+									</div>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<input type="email" class="form-control" name="email" id="registerEmail" placeholder="Email">
+							</div>
+							
+							<div class="row">
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<div class="form-group">
+										<input type="password" class="form-control" name="password" id="registerPasswordConfirm" placeholder="Password">
+									</div>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<div class="form-group">
+										<input type="password" class="form-control" name="passwordConfirm" id="registerPasswordConfirm" placeholder="Confirm Password">
+									</div>
+								</div>
+							</div>
+							
+							<button class="btn btn-default" type="submit">Submit</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

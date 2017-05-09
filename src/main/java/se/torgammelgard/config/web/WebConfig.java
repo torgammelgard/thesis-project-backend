@@ -19,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
@@ -58,7 +59,13 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ServletContext
         registry.addWebRequestInterceptor(openEntityManagerInViewInterceptor());
         super.addInterceptors(registry);
     }
-
+    
+//	@Override
+//	public void addViewControllers(ViewControllerRegistry registry) {
+//		registry.addViewController("/login").setViewName("login");
+//		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+//	}
+	
     @Override
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;
@@ -80,12 +87,18 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ServletContext
         resolver.setCharacterEncoding("UTF-8");
         return resolver;
     }
-
+    
+    @Bean
+    public SpringSecurityDialect dialect() {
+    	return new SpringSecurityDialect();
+    }
+    
     @Bean
     @Description("Thymeleaf Template Engine")
     public TemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setEnableSpringELCompiler(true);
+        templateEngine.addDialect(dialect());
         templateEngine.setTemplateResolver(templateResolver());
         return templateEngine;
     }
