@@ -12,7 +12,9 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Privilege implements Serializable {
   
-    @Id
+	private static final long serialVersionUID = -3742341175576784265L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
  

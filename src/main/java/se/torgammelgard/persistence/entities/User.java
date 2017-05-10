@@ -33,6 +33,12 @@ public class User implements Serializable {
     @JsonView(Views.Public.class)
     private String username;
     
+    @JsonView(Views.Public.class)
+    private String firstName;
+    
+    @JsonView(Views.Public.class)
+    private String lastName;
+    
     private String password;
 
     private Boolean enabled;

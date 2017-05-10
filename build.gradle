@@ -21,6 +21,9 @@ dependencies {
 
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.0-b05'
 
+	// Validation
+	compile group: 'javax.validation', name: 'validation-api', version: '1.1.0.Final'
+
     // Spring
     compile group: 'org.springframework', name: 'spring-core', version: '4.3.8.RELEASE'
     compile group: 'org.springframework', name: 'spring-context', version: '4.3.8.RELEASE'
