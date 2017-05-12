@@ -32,6 +32,7 @@ public class PersistenceConfig {
             setUrl(env.getProperty("jdbc.url"));
             setUsername(env.getProperty("jdbc.username"));
             setPassword(env.getProperty("jdbc.password"));
+            setConnectionProperties(hibernateProperties());
         }};
     }
 
@@ -39,7 +40,7 @@ public class PersistenceConfig {
 	Properties hibernateProperties() {
         return new Properties() {{
             //setProperty("hibernate.connection.driver_class", env.getProperty("jdbc.driverClassname"));
-
+        	setProperty("hibernate.connection.characterEncoding", "UTF-8");
         }};
     }
 }

@@ -15,6 +15,14 @@ public class UserDto {
 	
 	@NotNull
 	@Size(min=3)
+	private String firstName;
+	
+	@NotNull
+	@Size(min=3)
+	private String lastName;
+	
+	@NotNull
+	@Size(min=3)
 	private String password;
 	private String mastchingPassword;
 
@@ -51,5 +59,21 @@ public class UserDto {
 
 	public void setMastchingPassword(String mastchingPassword) {
 		this.mastchingPassword = mastchingPassword;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 }

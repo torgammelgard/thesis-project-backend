@@ -3,8 +3,10 @@ package se.torgammelgard.web;
 import java.text.DateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,9 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import se.torgammelgard.dto.UserDto;
+import se.torgammelgard.exception.EmailExistsException;
+import se.torgammelgard.persistence.entities.User;
+import se.torgammelgard.service.UserService;
 
 @Controller
 @RequestMapping("/")
@@ -23,6 +28,9 @@ public class RootController {
 
     private DateFormat dateFormat = DateFormat.getDateInstance();
 
+    @Autowired
+    private UserService userService;
+    
     @RequestMapping
     public String root(Model model) {
         model.addAttribute("serverTime", dateFormat.format(new Date()));
@@ -51,12 +59,27 @@ public class RootController {
     	return mav;
     }
     
-    @PostMapping("/register")
-    public ModelAndView register(@Valid UserDto userDto, BindingResult result, WebRequest request, Errors errors) {
-    	ModelAndView mav = new ModelAndView();
+    @PostMapping("/registration")
+    public ModelAndView registration(@Valid UserDto userDto, BindingResult result, WebRequest request, Errors errors) 
+    		throws EmailExistsException {
     	
-    	mav.addObject("msg", "Welcome new member");
-    	mav.setViewName("redirect:index");
-    	return mav;
+    	User newUser = null;
+    	try {
+    		newUser = userService.registerNewUser(userDto);
+    	} catch (EmailExistsException e) {
+    	}
+    	
+    	if (newUser != null) {
+    		return new ModelAndView("successful_registration", "new_user", newUser);
+    	} else {
+    		return new ModelAndView("login");
+    	}
+    }
+    
+    @RequestMapping("/successfulregistration")
+    public String successfulRegistration(Model model, HttpServletRequest request) {
+    	//User newUser = (User) request.getAttribute("new_user");
+    	//model.addAttribute("new_user", newUser);
+    	return "successful_registration";
     }
 }

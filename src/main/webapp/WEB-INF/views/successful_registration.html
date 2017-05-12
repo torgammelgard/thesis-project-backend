@@ -3,6 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset='UTF-8'>
+<meta http-equiv="Refresh" th:content="'5; url=' + @{/login}" />
 <title>Main page</title>
 <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -23,37 +24,14 @@
 	<div th:replace="fragments/header :: header"></div>
 	
 	<div class="container">
-
-		<div class="starter-template">
-			<h1>Tennis logger</h1>
-			<span th:text="${msg != null ? 'Welcome new user' : 'Old user'}"></span>
-			<p class="lead">
-				Use this app to log your tennis matches. <br>Track your results
-				and analyze your progress.
-			</p>
-		</div>
-
-		<!-- Menu -->
 		<div class="row">
-			<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-3">
-				<a class="btn btn-default btn-block" th:href="@{match/view_matches_page}" role="button">
-					<span th:text="#{index.view.matches}"></span>
-				</a>
-				<a class="btn btn-default btn-block" th:href="@{/match/add_form_page}" role="button">
-		 			<span th:text="#{index.add.match}"></span>
-				</a>
+			<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+				<div th:if="${new_user}" class="alert alert-info" role="alert">
+					<p th:text="#{welcome.message.newuser} + ${new_user.getUsername()}"></p>
+				</div>
 			</div>
 		</div>
-
-		<br>
-		<span th:text="#{welcome.message}"></span>
-		<br>
-		<span
-			th:text="${serverTime}"></span>
-		<br />
-		<img th:src="@{/images/tennisball.png}">
 	</div>
 
-	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
