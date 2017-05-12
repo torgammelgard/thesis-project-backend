@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +39,11 @@ public class RootController {
         return "index";
     }
 
+    @GetMapping("/successful_logout")
+    public String logout() {
+    	return "logged_out";
+    }
+    
     @RequestMapping("/login")
     public ModelAndView login(
     		@RequestParam(value = "error", required = false) String error,
@@ -51,15 +58,14 @@ public class RootController {
     	}
     	
     	// add a user for the registration form
-    	UserDto userDto = new UserDto();
-    	mav.addObject("user", userDto);
+    	mav.addObject("userDto", new UserDto());
     	
     	mav.setViewName("login");
     	
     	return mav;
     }
     
-    @PostMapping("/registration")
+    @PostMapping(value = "/registration", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ModelAndView registration(@Valid UserDto userDto, BindingResult result, WebRequest request, Errors errors) 
     		throws EmailExistsException {
     	

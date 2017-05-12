@@ -2,7 +2,6 @@ package se.torgammelgard.web;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,8 +26,6 @@ import se.torgammelgard.persistence.entities.TennisSetScore;
 import se.torgammelgard.persistence.entities.User;
 import se.torgammelgard.service.MatchService;
 import se.torgammelgard.service.TeamService;
-import se.torgammelgard.service.TennisSetScoreService;
-import se.torgammelgard.service.TennisSetService;
 import se.torgammelgard.service.UserService;
 
 @Controller
@@ -40,12 +37,6 @@ public class MatchPathController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private TennisSetScoreService tennisSetScoreService;
-
-    @Autowired
-    private TennisSetService tennisSetService;
 
     @Autowired
     private MatchService matchService;

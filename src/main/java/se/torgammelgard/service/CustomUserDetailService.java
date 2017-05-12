@@ -23,8 +23,6 @@ import se.torgammelgard.repository.UserRepository;
 @Transactional
 public class CustomUserDetailService implements UserDetailsService {
 
-	private static final long serialVersionUID = 8412732665076150291L;
-
 	@Autowired
 	private UserRepository userRepository;
 

@@ -85,6 +85,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ServletContext
         resolver.setTemplateEngine(templateEngine());
         resolver.setOrder(1);
         resolver.setCharacterEncoding("UTF-8");
+        resolver.setContentType("text/html;charset=UTF-8");
         return resolver;
     }
     
@@ -110,6 +111,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ServletContext
         templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML5");
+        templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
     }
 

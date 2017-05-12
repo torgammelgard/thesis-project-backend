@@ -24,7 +24,7 @@ public class UserDto {
 	@NotNull
 	@Size(min=3)
 	private String password;
-	private String mastchingPassword;
+	private String matchingPassword;
 
 	public UserDto() {
 	}
@@ -53,12 +53,12 @@ public class UserDto {
 		this.password = password;
 	}
 
-	public String getMastchingPassword() {
-		return mastchingPassword;
+	public String getMatchingPassword() {
+		return matchingPassword;
 	}
 
-	public void setMastchingPassword(String mastchingPassword) {
-		this.mastchingPassword = mastchingPassword;
+	public void setMatchingPassword(String matchingPassword) {
+		this.matchingPassword = matchingPassword;
 	}
 
 	public String getFirstName() {

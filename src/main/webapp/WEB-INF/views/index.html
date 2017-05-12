@@ -26,7 +26,6 @@
 
 		<div class="starter-template">
 			<h1>Tennis logger</h1>
-			<span th:text="${msg != null ? 'Welcome new user' : 'Old user'}"></span>
 			<p class="lead">
 				Use this app to log your tennis matches. <br>Track your results
 				and analyze your progress.
@@ -35,7 +34,7 @@
 
 		<!-- Menu -->
 		<div class="row">
-			<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-3">
+			<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 				<a class="btn btn-default btn-block" th:href="@{match/view_matches_page}" role="button">
 					<span th:text="#{index.view.matches}"></span>
 				</a>

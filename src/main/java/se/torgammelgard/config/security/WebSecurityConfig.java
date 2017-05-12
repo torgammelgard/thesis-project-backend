@@ -1,7 +1,5 @@
 package se.torgammelgard.config.security;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -53,12 +51,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //.anyRequest().permitAll() // TODO change this
                 //.antMatchers("**/api/team").permitAll()
-                .antMatchers(new String[]{"/registration", "/successfulregistration"}).permitAll()
+                .antMatchers(new String[]{"/registration", "/successfulregistration", "/successful_logout"}).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll().failureUrl("/login?error")
                 .and()
-                .logout().logoutSuccessHandler(myLogoutSuccessHandler()).logoutSuccessUrl("/login").deleteCookies("JSESSIONID")
+                .logout().logoutUrl("/perform_logout").logoutSuccessHandler(myLogoutSuccessHandler()).deleteCookies("JSESSIONID")
                 .and()
                 .csrf().disable();
     }
