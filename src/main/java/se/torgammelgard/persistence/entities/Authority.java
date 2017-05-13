@@ -1,7 +1,10 @@
 package se.torgammelgard.persistence.entities;
 
-import javax.persistence.*;
 import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
+import javax.persistence.JoinColumn;
 
 //@Entity
 //@Table(name = "AUTHORITIES")

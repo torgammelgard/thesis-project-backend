@@ -51,10 +51,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //.anyRequest().permitAll() // TODO change this
                 //.antMatchers("**/api/team").permitAll()
-                .antMatchers(new String[]{"/registration", "/successfulregistration", "/successful_logout"}).permitAll()
+                .antMatchers(new String[]{"/registration", "/successfulregistration", "/successful_logout", "/perform_login"}).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").permitAll().failureUrl("/login?error")
+                .formLogin().loginPage("/login").permitAll().loginProcessingUrl("/perform_login").failureUrl("/login?error")
                 .and()
                 .logout().logoutUrl("/perform_logout").logoutSuccessHandler(myLogoutSuccessHandler()).deleteCookies("JSESSIONID")
                 .and()

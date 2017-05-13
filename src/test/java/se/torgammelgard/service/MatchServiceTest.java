@@ -17,7 +17,6 @@ import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.persistence.entities.TennisSet;
 import se.torgammelgard.persistence.entities.TennisSetScore;
-import se.torgammelgard.service.MatchService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestConfig.class})

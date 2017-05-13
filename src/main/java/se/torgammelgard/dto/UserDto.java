@@ -24,6 +24,9 @@ public class UserDto {
 	@NotNull
 	@Size(min=3)
 	private String password;
+	
+	@NotNull
+	@Size(min=3)
 	private String matchingPassword;
 
 	public UserDto() {

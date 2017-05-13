@@ -1,13 +1,14 @@
 package se.torgammelgard.formatters;
 
+import java.text.ParseException;
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
+
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.service.TeamService;
-
-import java.text.ParseException;
-import java.util.Locale;
 
 @Component
 public class TeamFormatter implements Formatter<Team> {

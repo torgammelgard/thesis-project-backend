@@ -1,5 +1,4 @@
 package se.torgammelgard.service;
-import config.TestConfig;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,9 +9,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import config.TestConfig;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.repository.TeamRepository;
-import se.torgammelgard.service.TeamService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestConfig.class})
