@@ -6,16 +6,15 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Match;
 
 @Service
 @Transactional
 public interface MatchService {
 
-    public List<Match> findAll();
-
-    public Match save(Match match);
-
+    public List<Match> findAllFor(Principal principal) throws UserNotFoundException;
+    
     public Match save(Match match, Principal principal);
 
     public void delete(long id);

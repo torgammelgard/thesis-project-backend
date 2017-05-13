@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.persistence.entities.TennisSet;
 import se.torgammelgard.persistence.entities.TennisSetScore;
@@ -45,9 +46,9 @@ public class MatchPathController {
     }
 
     @RequestMapping("/view_matches_page")
-    public String viewMatches(Model model) {
+    public String viewMatches(Model model, Principal principal) throws UserNotFoundException {
         List<Match> matches = new ArrayList<>(0);
-        matchService.findAll().forEach(matches::add);
+        matches = matchService.findAllFor(principal);
         MatchTable matchTable = new MatchTable(matches);
 
         model.addAttribute("matchTable", matchTable);
@@ -101,10 +102,6 @@ public class MatchPathController {
         return "redirect:/api/match";
     }
 
-    @SuppressWarnings("serial")
-    public class UserNotFoundException extends RuntimeException {
-    }
-    
 	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "No such User")
 	@ExceptionHandler(UserNotFoundException.class)
 	public ModelAndView userNotFound(Exception e) {

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.persistence.entities.User;
 import se.torgammelgard.repository.MatchRepository;
@@ -22,14 +23,22 @@ public class MatchServiceImpl implements MatchService {
     @Autowired
     UserRepository userRepository;
 
-    public List<Match> findAll() {
-        List<Match> matches = new ArrayList<>(0);
-        matchRepository.findAll().forEach(matches::add);
+    public List<Match> findAllFor(Principal principal) throws UserNotFoundException {
+    	// check if user exists
+    	User owner = userRepository.findByUsername(principal.getName());
+    	if (owner == null) {
+    		throw new UserNotFoundException();
+    	}
+    	
+    	// find all matches belonging to the user
+    	List<Match> matches = new ArrayList<>(0);
+        matchRepository.findAll().forEach((match) -> {
+        	if (match.getOwner().getId() == owner.getId()) {
+        		matches.add(match);
+        	}
+        });
+        
         return matches;
-    }
-
-    public Match save(Match match) {
-        return matchRepository.save(match);
     }
 
     public Match save(Match match, Principal principal) {
@@ -41,7 +50,7 @@ public class MatchServiceImpl implements MatchService {
         	return null;
         }
         match.setOwner(user);
-        return save(match);
+        return matchRepository.save(match);
     }
 
     public void delete(long id) {

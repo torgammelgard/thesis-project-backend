@@ -1,6 +1,6 @@
 package se.torgammelgard.exception;
 
 @SuppressWarnings("serial")
-public class EmailExistsException extends Exception {
+public class UserNotFoundException extends RuntimeException {
 
 }
