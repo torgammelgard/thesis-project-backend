@@ -1,9 +1,7 @@
 package se.torgammelgard.service;
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,7 +61,7 @@ public class MatchServiceTest {
         TennisSetScore tennisSetScore = new TennisSetScore();
         tennisSetScore.setScoreTeamOne(4);
         tennisSetScore.setScoreTeamTwo(6);
-        tennisSet1.setTennisSetScore(Arrays.asList(tennisSetScore));
+        tennisSet1.setTennisSetScore(tennisSetScore);
 
         // TODO mock a principal or a user and use findAllFor(principal)
         //List<Match> matches = matchService.findAll();

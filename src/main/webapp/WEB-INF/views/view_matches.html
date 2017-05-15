@@ -26,22 +26,22 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
+						<th>-</th>
 						<th>#</th>
-						<th>Match name</th>
-						<th>Team 1 name</th>
-						<th>Team 2 name</th>
+						<th th:text="#{view_matches.match}"></th>
+						<th th:text="#{view_matches.team_one}"></th>
+						<th th:text="#{view_matches.team_two}"></th>
 					</tr>
 				</thead>
 				<tbody>
-
 					<tr class="clickable-row" th:each="match : *{matches}">
 						<td><input type="checkbox" th:field="*{selectedMatches}"
 							th:value="${match.id}"></td>
-						<td th:text="${match.id}">1</td>
-						<td th:text="${match.name}">Foo</td>
-						<td th:text="${match.teamOne} ? ${match.teamOne.teamName}">Team
+						<td th:text="${match.id}">__match_id</td>
+						<td th:text="${match.name}">__match_name</td>
+						<td th:text="${match.teamOne} ? ${match.teamOne.teamName}">__Team
 							1</td>
-						<td th:text="${match.teamTwo} ? ${match.teamTwo.teamName}">Team
+						<td th:text="${match.teamTwo} ? ${match.teamTwo.teamName}">__Team
 							2</td>
 					</tr>
 				</tbody>

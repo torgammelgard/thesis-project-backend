@@ -25,12 +25,11 @@ public class MatchDto {
 
 	public MatchDto() {
 		List<TennisSet> tennisSets = new ArrayList<TennisSet>();
-		for (int i = 1; i <=5; i++) {
+		for (int i = 1; i <= 5; i++) {
 			TennisSet tennisSet = new TennisSet();
 			tennisSet.setSetNumber(i);
 			TennisSetScore tss = new TennisSetScore();
-			tss.setScoreTeamOne(5);
-			tss.setScoreTeamTwo(7);
+			tss.setScoreTeamOne(0);
 			tennisSet.setTennisSetScore(tss);
 			tennisSets.add(tennisSet);
 		}

@@ -40,16 +40,15 @@ public class TeamServiceImpl implements TeamService {
     	return teams;
     }
     
-    public Team save(Team team) {
-        return teamRepository.save(team);
-    }
-
-    public Team save(Team team, Principal principal) {
+    public Team save(Team team, Principal principal) throws UserNotFoundException {
         if (team == null)
             return null;
         User user = userRepository.findByUsername(principal.getName());
+        if (user == null) {
+        	throw new UserNotFoundException();
+        }
         team.setOwner(user);
-        return save(team);
+        return teamRepository.save(team);
     }
 
     public Team find(Long id) {

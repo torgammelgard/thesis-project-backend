@@ -1,10 +1,16 @@
 package se.torgammelgard.service;
+import java.security.Principal;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,12 +29,20 @@ public class TeamServiceTest {
     @Autowired
     private TeamRepository teamRepository;
 
+    
     @Autowired
     private TeamService teamService;
-
+    
+    Principal principal;
+    
     @Before
     public void setup() {
-
+    	Authentication authentication = Mockito.mock(Authentication.class);
+    	// Mockito.whens() for your authorization object
+    	SecurityContext securityContext = Mockito.mock(SecurityContext.class);
+    	Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
+    	SecurityContextHolder.setContext(securityContext);
+    	Principal p = (Principal) authentication.getPrincipal();
         teamRepository.save(TEAM_ONE);
         teamRepository.save(TEAM_TWO);
     }
@@ -38,7 +52,7 @@ public class TeamServiceTest {
     @Test
     @Transactional
     public void findAll_TwoTeams_IterableLengthOfTwo() {
-        Iterable<Team> allteams = teamService.findAll();
+        Iterable<Team> allteams = teamService.findAllFor(principal);
         int size = 0;
         for (@SuppressWarnings("unused") Team t : allteams) {
             size++;

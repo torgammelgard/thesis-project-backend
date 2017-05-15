@@ -47,7 +47,7 @@ public class MatchPathController {
     public MatchPathController() {
     }
 
-    @RequestMapping("/view_matches_page")
+    @RequestMapping("/view")
     public String viewMatches(Model model, Principal principal) throws UserNotFoundException {
         List<Match> matches = new ArrayList<>(0);
         matches = matchService.findAllFor(principal);
@@ -62,7 +62,7 @@ public class MatchPathController {
         for (Long id : matchTable.getSelectedMatches()) {
             matchService.delete(id);
         }
-        return "redirect:/match/view_matches_page";
+        return "redirect:/match/view";
     }
 
     private List<TennisSetScore> generateTennisSetScores() {
@@ -89,7 +89,7 @@ public class MatchPathController {
     }
     
     @RequestMapping("/add_form_page")
-    public String addMatch(Model model, Principal principal) {
+    public String addMatch(Model model, Principal principal) throws UserNotFoundException {
     	
 //    	Match match = new Match();
 //    	List<TennisSet> tennisSets = generateTennisSets();
@@ -98,12 +98,11 @@ public class MatchPathController {
     	//model.addAttribute("tennis_set", tennisSet);
         //model.addAttribute("setscore", new TennisSetScore());
     	User owner = userService.findByUsername(principal.getName());
-    	if (owner != null) {
-//	        model.addAttribute("match", match);
-//	        model.addAttribute("tennis_sets", tennisSets);
-    		model.addAttribute("matchDto", new MatchDto());
-	        model.addAttribute("teams", teamService.findAllFor(principal)); // TODO handle what to do if < 2 teams
+    	if (owner == null) {
+    		throw new UserNotFoundException();
     	}
+		model.addAttribute("matchDto", new MatchDto());
+        model.addAttribute("teams", teamService.findAllFor(principal)); // TODO handle what to do if < 2 teams
         return "add_match";
     }
 
@@ -113,14 +112,15 @@ public class MatchPathController {
             BindingResult bindingResult,
             Model model,
             HttpServletResponse response,
-            Principal principal) {
+            Principal principal) throws UserNotFoundException {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
             return "error_page";
         }
 
         // Check if user is logged in (exists)
-        if (principal == null || userService.findByUsername(principal.getName()) == null) {
+        User user = userService.findByUsername(principal.getName());
+        if (principal == null || user == null) {
             throw new UserNotFoundException();
         }
         // TODO check in docs if matchDto can be null if no binding errors
@@ -129,10 +129,11 @@ public class MatchPathController {
 
         // 
         Match match = matchDto.convertToMatch();
+        match.setOwner(user);
         
         matchService.save(match, principal);
 
-        return "redirect:/api/match";
+        return "redirect:/match/view";
     }
 
 	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "No such User")

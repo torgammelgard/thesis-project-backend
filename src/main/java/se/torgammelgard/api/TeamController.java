@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import se.torgammelgard.Views;
+import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Team;
-import se.torgammelgard.persistence.entities.User;
 import se.torgammelgard.service.TeamService;
 import se.torgammelgard.service.UserService;
 
@@ -40,17 +40,8 @@ public class TeamController {
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @JsonView(Views.Public.class)
-    public @ResponseBody Team addTeam(@RequestBody Team team) {
-    	Team t = null;
-    	if (team.getOwner() != null) {
-    		User owner = team.getOwner();
-    		User existing_user = userService.findByUsername(owner.getUsername());
-    		if (existing_user != null) {
-    			team.setOwner(existing_user);
-    			t = teamService.save(team);
-    		}
-    	}
-    	return t;
+    public @ResponseBody Team addTeam(@RequestBody Team team, Principal principal) throws UserNotFoundException{
+    	return teamService.save(team, principal);
     }
     
     // TODO should be deleted later and replaced with POST

@@ -15,9 +15,7 @@ public interface TeamService {
 
     public List<Team> findAllFor(Principal principal) throws UserNotFoundException;
 
-    public Team save(Team team);
-
-    public Team save(Team team, Principal principal);
+    public Team save(Team team, Principal principal) throws UserNotFoundException;
 
     public Team find(Long id);
 }

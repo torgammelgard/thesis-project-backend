@@ -5,7 +5,15 @@ function updateDeleteBtn() {
 $(function () {
     $("table").on('click', '.clickable-row', function(e) {
         $(this).toggleClass('active');
+        $(this).find('input[type=checkbox]').prop('checked', function(i, val){ 
+        	return !val;
+        });
+        updateDeleteBtn();
     });
-    $("input[type=checkbox]").on("click", updateDeleteBtn);
-    //$("#deleteBtn").on("click", sendForm);
+    $("input[type=checkbox]").on("click", function() {
+    	$(this).prop('checked', function(i, val) {
+    		return !val;
+    	});
+    	updateDeleteBtn();
+    });
 });
