@@ -23,6 +23,7 @@ public class MatchServiceImpl implements MatchService {
     @Autowired
     UserRepository userRepository;
 
+    @Override
     public List<Match> findAllFor(Principal principal) throws UserNotFoundException {
     	// check if user exists
     	User owner = userRepository.findByUsername(principal.getName());
@@ -41,6 +42,7 @@ public class MatchServiceImpl implements MatchService {
         return matches;
     }
 
+    @Override
     public Match save(Match match, Principal principal) {
         if (principal == null) {
             return null;
@@ -53,10 +55,12 @@ public class MatchServiceImpl implements MatchService {
         return matchRepository.save(match);
     }
 
+    @Override
     public void delete(long id) {
         matchRepository.delete(id);
     }
 
+    @Override
     public void delete(Match match) {
         matchRepository.delete(match);
     }

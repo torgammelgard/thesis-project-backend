@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
 	private RoleRepository roleRepository;
 	
 	@Transactional
+	@Override
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}

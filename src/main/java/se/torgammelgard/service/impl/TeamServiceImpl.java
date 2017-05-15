@@ -25,13 +25,13 @@ public class TeamServiceImpl implements TeamService {
     @Autowired
     private UserRepository userRepository;
 
+    @Override
     public List<Team> findAllFor(Principal principal) throws UserNotFoundException {
     	List<Team> teams = new ArrayList<>();
     	User owner = userRepository.findByUsername(principal.getName());
     	if (owner == null) {
     		throw new UserNotFoundException();
     	}
-    	// TODO fix this to criteria instead
     	for (Team team : teamRepository.findAll()) {
     		if (team.getOwner() == owner) {
     			teams.add(team);
@@ -40,6 +40,7 @@ public class TeamServiceImpl implements TeamService {
     	return teams;
     }
     
+    @Override
     public Team save(Team team, Principal principal) throws UserNotFoundException {
         if (team == null)
             return null;
@@ -51,6 +52,7 @@ public class TeamServiceImpl implements TeamService {
         return teamRepository.save(team);
     }
 
+    @Override
     public Team find(Long id) {
         return teamRepository.findOne(id);
     }

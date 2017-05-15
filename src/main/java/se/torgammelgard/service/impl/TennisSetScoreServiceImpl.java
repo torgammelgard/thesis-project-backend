@@ -16,12 +16,14 @@ public class TennisSetScoreServiceImpl implements TennisSetScoreService {
     @Autowired
     private TennisSetScoreRepository tennisSetScoreRepository;
 
+    @Override
     public List<TennisSetScore> findAll() {
         List<TennisSetScore> tennisSetScores = Collections.emptyList();
         tennisSetScoreRepository.findAll().forEach(tennisSetScores::add);
         return tennisSetScores;
     }
 
+    @Override
     public TennisSetScore save(TennisSetScore tennisSetScore) {
         return tennisSetScoreRepository.save(tennisSetScore);
     }
