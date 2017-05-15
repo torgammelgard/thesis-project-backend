@@ -6,20 +6,18 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Team;
 
 @Service
+@Transactional
 public interface TeamService {
 
-    @Transactional
-    public List<Team> findAll();
+    public List<Team> findAllFor(Principal principal) throws UserNotFoundException;
 
-    @Transactional
     public Team save(Team team);
 
-    @Transactional
     public Team save(Team team, Principal principal);
 
-    @Transactional
     public Team find(Long id);
 }

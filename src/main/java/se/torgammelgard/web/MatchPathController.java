@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import se.torgammelgard.dto.MatchDto;
 import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.persistence.entities.TennisSet;
@@ -63,18 +65,51 @@ public class MatchPathController {
         return "redirect:/match/view_matches_page";
     }
 
+    private List<TennisSetScore> generateTennisSetScores() {
+    	List<TennisSetScore> tennisSetScores = new ArrayList<TennisSetScore>();
+    	for (int i = 0; i < 1; i++) {
+    		TennisSetScore tennisSetScore = new TennisSetScore();
+    		tennisSetScore.setScoreTeamOne(5);
+    		tennisSetScores.add(tennisSetScore);
+    	}
+    	return tennisSetScores;
+    }
+    
+    private List<TennisSet> generateTennisSets() {
+    	List<TennisSet> tennisSets = new ArrayList<TennisSet>();
+    	for (int i = 1; i <= 5; i++) {
+    		TennisSet tennisSet = new TennisSet();
+    		TennisSetScore tennisSetScore = new TennisSetScore();
+    		tennisSetScore.setScoreTeamOne(4); //TODO
+    		tennisSet.setTennisSetScore(tennisSetScore);
+    		tennisSet.setSetNumber(i);
+    		tennisSets.add(tennisSet);
+    	}
+		return tennisSets;
+    }
+    
     @RequestMapping("/add_form_page")
-    public String addMatch(Model model) {
-        model.addAttribute("setscore", new TennisSetScore());
-        model.addAttribute("match", new Match());
-        model.addAttribute("teams", teamService.findAll()); // TODO handle what to do if < 2 teams
+    public String addMatch(Model model, Principal principal) {
+    	
+//    	Match match = new Match();
+//    	List<TennisSet> tennisSets = generateTennisSets();
+//    	match.setTennisSets(tennisSets);
+    	
+    	//model.addAttribute("tennis_set", tennisSet);
+        //model.addAttribute("setscore", new TennisSetScore());
+    	User owner = userService.findByUsername(principal.getName());
+    	if (owner != null) {
+//	        model.addAttribute("match", match);
+//	        model.addAttribute("tennis_sets", tennisSets);
+    		model.addAttribute("matchDto", new MatchDto());
+	        model.addAttribute("teams", teamService.findAllFor(principal)); // TODO handle what to do if < 2 teams
+    	}
         return "add_match";
     }
 
     @PostMapping(value = "/save", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public String matchmng(
-            @ModelAttribute Match match,
-            @ModelAttribute TennisSetScore tennisSetScore,
+            @Valid @ModelAttribute MatchDto matchDto,
             BindingResult bindingResult,
             Model model,
             HttpServletResponse response,
@@ -85,18 +120,16 @@ public class MatchPathController {
         }
 
         // Check if user is logged in (exists)
-        User user = userService.findByUsername(principal.getName());
-        if (principal == null || user == null) {
+        if (principal == null || userService.findByUsername(principal.getName()) == null) {
             throw new UserNotFoundException();
         }
+        // TODO check in docs if matchDto can be null if no binding errors
+        if (matchDto == null) {
+        }
 
-        List<TennisSetScore> tennisSetScores = new ArrayList<>(0);
-        tennisSetScores.add(tennisSetScore);
-        TennisSet tennisSet = new TennisSet();
-        tennisSet.setTennisSetScore(tennisSetScores);
-        List<TennisSet> tennisSets = new ArrayList<>(0);
-        tennisSets.add(tennisSet);
-        match.setTennisSets(tennisSets);
+        // 
+        Match match = matchDto.convertToMatch();
+        
         matchService.save(match, principal);
 
         return "redirect:/api/match";

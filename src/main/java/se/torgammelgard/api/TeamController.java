@@ -34,8 +34,8 @@ public class TeamController {
     
     @GetMapping
     @JsonView(Views.Public.class)
-    public @ResponseBody List<Team> getAllTeams() {
-        return teamService.findAll();
+    public @ResponseBody List<Team> getAllTeams(Principal principal) {
+        return teamService.findAllFor(principal);
     }
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})

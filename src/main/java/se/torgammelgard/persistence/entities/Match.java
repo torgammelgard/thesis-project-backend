@@ -57,13 +57,17 @@ public class Match {
     private User owner;
 
     public void setTeamOne(Team teamOne) {
-        this.teamOne = teamOne;
-        teamOne.addTeam1_match(this);
+    	if (teamOne != null) {
+    		this.teamOne = teamOne;
+    		teamOne.addTeam1_match(this);
+    	}
     }
 
     public void setTeamTwo(Team teamTwo) {
-        this.teamTwo = teamTwo;
-        teamOne.addTeam2_match(this);
+    	if (teamTwo != null) {
+    		this.teamTwo = teamTwo;
+    		teamOne.addTeam2_match(this);
+    	}
     }
 
 	public Long getId() {

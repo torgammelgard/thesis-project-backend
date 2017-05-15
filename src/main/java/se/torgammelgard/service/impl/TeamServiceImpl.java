@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.persistence.entities.User;
 import se.torgammelgard.repository.TeamRepository;
@@ -15,6 +16,7 @@ import se.torgammelgard.repository.UserRepository;
 import se.torgammelgard.service.TeamService;
 
 @Component
+@Transactional
 public class TeamServiceImpl implements TeamService {
 	
     @Autowired
@@ -23,19 +25,25 @@ public class TeamServiceImpl implements TeamService {
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional
-    public List<Team> findAll() {
-        List<Team> teams = new ArrayList<>(0);
-        teamRepository.findAll().forEach(teams::add);
-        return teams;
+    public List<Team> findAllFor(Principal principal) throws UserNotFoundException {
+    	List<Team> teams = new ArrayList<>();
+    	User owner = userRepository.findByUsername(principal.getName());
+    	if (owner == null) {
+    		throw new UserNotFoundException();
+    	}
+    	// TODO fix this to criteria instead
+    	for (Team team : teamRepository.findAll()) {
+    		if (team.getOwner() == owner) {
+    			teams.add(team);
+    		}
+    	}
+    	return teams;
     }
-
-    @Transactional
+    
     public Team save(Team team) {
         return teamRepository.save(team);
     }
 
-    @Transactional
     public Team save(Team team, Principal principal) {
         if (team == null)
             return null;
@@ -44,7 +52,6 @@ public class TeamServiceImpl implements TeamService {
         return save(team);
     }
 
-    @Transactional
     public Team find(Long id) {
         return teamRepository.findOne(id);
     }

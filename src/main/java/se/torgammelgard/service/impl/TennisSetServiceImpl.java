@@ -24,14 +24,12 @@ public class TennisSetServiceImpl implements TennisSetService {
     }
 
     public TennisSet save(TennisSet tennisSet) {
-    	List<TennisSetScore> tennisSetScores = tennisSet.getTennisSetScore();
+    	TennisSetScore tennisSetScore = tennisSet.getTennisSetScore();
     	boolean proceedWithSave = true;
-    	for (TennisSetScore tss : tennisSetScores) {
-    		if (verify(tss)) {
-    			proceedWithSave = false;
-    			break;
-    		}
-    	}
+    	// TODO fix if this should be here
+//		if (verify(tennisSetScore)) {
+//			proceedWithSave = false;
+//		}
     	if (proceedWithSave) {
     		return tennisSetRepository.save(tennisSet);
     	} else {

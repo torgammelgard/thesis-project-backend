@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -30,7 +30,7 @@ public class TennisSetScore {
     @JsonView(Views.Public.class)
     private int scoreTeamTwo;
 
-    @ManyToMany(mappedBy = "tennisSetScore", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tennisSetScore", cascade = CascadeType.ALL)
     private Set<TennisSet> tennisSets = new HashSet<>(0);
 
 	public TennisSetScore() {

@@ -2,3 +2,15 @@
     padding: 40px 15px;
     text-align: center;
 }
+.container {
+	position: relative;
+	background-color: rgba(16, 218, 0, 0.1);
+}
+#background_tennisball {
+	display: block;
+	width: 45%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1000;
+}

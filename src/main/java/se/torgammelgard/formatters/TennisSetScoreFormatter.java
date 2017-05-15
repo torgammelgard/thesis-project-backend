@@ -21,7 +21,7 @@ public class TennisSetScoreFormatter implements Formatter<TennisSetScore> {
     }
 
     @Override
-    public String print(TennisSetScore object, Locale locale) {
+    public String print(TennisSetScore tennisSetScore, Locale locale) {
         return null;
     }
 }
