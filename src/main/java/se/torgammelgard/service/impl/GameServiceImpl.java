@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import se.torgammelgard.persistence.entities.Game;
 import se.torgammelgard.repository.GameRepository;
@@ -21,6 +22,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Game> findAll() {
         ArrayList<Game> games = new ArrayList<>();
         Iterable<Game> itGames= gameRepository.findAll();

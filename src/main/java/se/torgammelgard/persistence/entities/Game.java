@@ -15,6 +15,7 @@ import se.torgammelgard.Views;
 
 @Entity
 @Table(name = "GAMES")
+@SuppressWarnings("serial")
 public class Game implements Serializable {
 
 	@Id
