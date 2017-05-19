@@ -1,0 +1,17 @@
+.panel {
+	background-color:rgba(0,0,0,0) !important;
+	border:none !important;
+}
+
+.no-spinners {
+  -moz-appearance:textfield;
+}
+
+.no-spinners::-webkit-outer-spin-button,
+.no-spinners::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#team_panel {
+	margin-top:15px;
+}
