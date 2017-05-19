@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -14,25 +15,27 @@ import com.fasterxml.jackson.annotation.JsonView;
 import se.torgammelgard.Views;
 
 @Entity
+@NamedQuery(name = "Game.findByVersion", query = "select g from Game g where g.version = ?1")
 @Table(name = "GAMES")
 public class Game implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@JsonView(Views.Public.class)
-	private long id;
+	private Long id;
 
 	@JsonView(Views.Public.class)
 	private String name;
 
 	@Version
-	private long version;
+	@JsonView(Views.Public.class)
+	private Long version;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

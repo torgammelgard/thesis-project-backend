@@ -32,7 +32,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public Game save(Game game) {
-        return gameRepository.save(game);
+        return gameRepository.saveAndFlush(game);
     }
 
     @Override

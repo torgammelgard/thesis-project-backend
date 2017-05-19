@@ -22,6 +22,8 @@ public class GameServiceTest {
     private static final Game TEST_GAME_1 = new Game("Test game 1");
     private static final Game TEST_GAME_2 = new Game("Test game 2");
 
+    private int totalGamesAtStart;
+    
     @Autowired
     GameRepository gameRepository;
 
@@ -30,14 +32,15 @@ public class GameServiceTest {
 
     @Before
     public void setup() {
-        gameRepository.save(TEST_GAME_1);
-        gameRepository.save(TEST_GAME_2);
+    	totalGamesAtStart = gameService.findAll().size();
     }
 
     @Test
     public void testGameRepository() {
+        gameRepository.save(TEST_GAME_1);
+        gameRepository.save(TEST_GAME_2);
         List<Game> games = gameService.findAll();
-        Assert.assertEquals("There should be two games", 2, games.size());
+        Assert.assertEquals("There should be two games", totalGamesAtStart + 2, games.size());
     }
 
     @After
