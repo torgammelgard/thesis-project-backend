@@ -20,7 +20,6 @@ import se.torgammelgard.Views;
 import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.service.TeamService;
-import se.torgammelgard.service.UserService;
 
 @Controller
 @RequestMapping("/api/team")
@@ -29,9 +28,6 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
-    @Autowired
-    private UserService userService;
-    
     @GetMapping
     @JsonView(Views.Public.class)
     public @ResponseBody List<Team> getAllTeams(Principal principal) {

@@ -35,9 +35,13 @@ public class RootController {
     @Autowired
     private UserService userService;
     
+    @ModelAttribute(name = "serverTime")
+    public String serverTime() {
+    	return dateFormat.format(new Date());
+    }
+    
     @RequestMapping
     public String root(Model model) {
-        model.addAttribute("serverTime", dateFormat.format(new Date()));
         return "index";
     }
 

@@ -6,19 +6,15 @@ import javax.validation.constraints.Size;
 public class UserDto {
 
 	@NotNull
-	@Size(min=3)
+	@Size(min=1)
 	private String username;
 	
 	@NotNull
 	@Size(min=3)
 	private String email;
 	
-	@NotNull
-	@Size(min=3)
 	private String firstName;
 	
-	@NotNull
-	@Size(min=3)
 	private String lastName;
 	
 	@NotNull

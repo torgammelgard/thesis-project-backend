@@ -13,12 +13,18 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<div class="panel-footer" th:fragment="footer">
-		<div id="about" th:text="#{footer.about}"></div>
-		<br>
-		<div id="contact">
-			Contact <a href=mailto:tor.gammelgard@gmail.com>Tor Gammelgård</a>
+	<footer class="panel-footer" th:fragment="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+					<div class="text-center" id="about" th:text="#{footer.about}"></div>
+					<div class="text-center" id="contact">
+						Contact <a th:href="'mailto:' + #{footer.email_address} + '?subject=' + #{footer.email_subject}">
+							<span th:text="#{footer.email_name}">--creator--</span></a>
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
+	</footer>
 </body>
 </html>

@@ -17,5 +17,7 @@ public interface TeamService {
 
     public Team save(Team team, Principal principal) throws UserNotFoundException;
 
+    public void delete(Long id);
+    
     public Team find(Long id);
 }

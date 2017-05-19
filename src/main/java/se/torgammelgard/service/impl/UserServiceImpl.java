@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import se.torgammelgard.dto.UserDto;
 import se.torgammelgard.exception.EmailExistsException;
+import se.torgammelgard.form.UserForm;
 import se.torgammelgard.persistence.entities.Role;
 import se.torgammelgard.persistence.entities.User;
 import se.torgammelgard.repository.RoleRepository;
@@ -51,6 +52,18 @@ public class UserServiceImpl implements UserService {
 		user.setRoles(Arrays.asList(adminRole));
 		user.setEnabled(true);
 		
+		return userRepository.save(user);
+	}
+	
+	@Override
+	public User update(UserForm userForm) {
+		User user = new User();
+		user.setId(userForm.getId());
+		user.setUsername(userForm.getUsername());
+		user.setFirstName(userForm.getFirstName() == null ? "" : userForm.getFirstName());
+		user.setLastName(userForm.getLastName() == null ? "" : userForm.getLastName());
+		user.setPassword(userForm.getPassword());
+		user.setEnabled(true);
 		return userRepository.save(user);
 	}
 

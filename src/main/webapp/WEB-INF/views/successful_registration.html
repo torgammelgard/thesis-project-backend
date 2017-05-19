@@ -18,7 +18,6 @@
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" th:href="@{/styles/main.css}">
-<link rel="stylesheet" th:href="@{/styles/starter-template.css}">
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
@@ -26,10 +25,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-				<div th:if="${new_user}" class="alert alert-info" role="alert">
-					<p th:text="#{welcome.message.newuser} + ${new_user.getUsername()}"></p>
-					<p th:text="#{welcome.message.newuser} + ${new_user.getFirstName()}"></p>
-					<p th:text="#{welcome.message.newuser} + ${new_user.getLastName()}"></p>
+				<div th:if="${new_user}" class="alert alert-success" role="alert">
+					<strong>Great!</strong>
+					<span th:text="#{successful_registration.newuser_message} + ${new_user.getUsername()}">--Welcome username--</span>
+					<br>
+					<span th:text="#{successful_registration.redirect_message}">--Redirected--</span>
 				</div>
 			</div>
 		</div>

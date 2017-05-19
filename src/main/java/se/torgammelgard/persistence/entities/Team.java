@@ -14,6 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -21,11 +26,16 @@ import se.torgammelgard.Views;
 
 @Entity
 @Table(name = "TEAMS")
+@PropertySource(value = "classpath:/messages.properties")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 			// not sure if needed
 public class Team implements Serializable {
 
 	private static final long serialVersionUID = 146345634234L;
 
+	@Autowired
+	@Transient
+	Environment env;
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonView(Views.Public.class)
@@ -139,6 +149,20 @@ public class Team implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Team [teamName=" + teamName + "]";
+		StringBuilder builder = new StringBuilder();
+		if (teamName != null && !teamName.equalsIgnoreCase("")) {
+			builder.append("[").append(teamName).append("] ");
+		}
+		if (playerOneName != null && !playerOneName.equalsIgnoreCase("")) {
+			builder.append(playerOneName);
+		}
+		if (playerTwoName != null && !playerTwoName.equalsIgnoreCase("")) {
+			if (env != null) {
+				builder.append(env.getProperty("team.and")).append(playerTwoName);
+			} else {
+				builder.append(" _and_ ").append(playerTwoName);
+			}
+		}
+		return builder.toString();
 	}
 }

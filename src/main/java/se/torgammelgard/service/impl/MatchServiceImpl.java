@@ -43,13 +43,13 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public Match save(Match match, Principal principal) {
+    public Match save(Match match, Principal principal) throws UserNotFoundException {
         if (principal == null) {
             return null;
         }
         User user = userRepository.findByUsername(principal.getName());
         if (user == null) {
-        	return null;
+        	throw new UserNotFoundException();
         }
         match.setOwner(user);
         return matchRepository.save(match);

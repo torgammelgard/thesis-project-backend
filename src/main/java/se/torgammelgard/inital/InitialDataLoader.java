@@ -64,6 +64,8 @@ public class InitialDataLoader implements
     		return;
     	User user = new User();
         user.setUsername(username);
+        user.setFirstName("");
+        user.setLastName("");
         user.setPassword(passwordEncoder.encode(password));
         user.setRoles(Arrays.asList(adminRole));
         user.setEnabled(true);
