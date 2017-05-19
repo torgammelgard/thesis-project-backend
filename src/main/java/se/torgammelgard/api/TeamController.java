@@ -30,14 +30,14 @@ public class TeamController {
 
     @GetMapping
     @JsonView(Views.Public.class)
-    public @ResponseBody List<Team> getAllTeams(Principal principal) {
-        return teamService.findAllFor(principal);
+    public @ResponseBody List<Team> getAllTeams(Principal principal) throws UserNotFoundException {
+        return teamService.findAllBelongingTo(principal);
     }
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @JsonView(Views.Public.class)
     public @ResponseBody Team addTeam(@RequestBody Team team, Principal principal) throws UserNotFoundException{
-    	return teamService.save(team, principal);
+    	return teamService.saveAndFlush(team, principal);
     }
     
     // TODO should be deleted later and replaced with POST
@@ -46,7 +46,7 @@ public class TeamController {
     public @ResponseBody Team addRandomTeam(Principal principal) {
         Team team = new Team();
         team.setTeamName(String.format("Team name with random number %d", new Random().nextInt(100)));
-        return teamService.save(team, principal);
+        return teamService.saveAndFlush(team, principal);
     }
     
 	@ExceptionHandler

@@ -71,13 +71,7 @@ public class MatchPathController {
 			throw new UserNotFoundException();
 		}
 		model.addAttribute("matchDto", new MatchDto());
-		model.addAttribute("teams", teamService.findAllFor(principal)); // TODO
-																		// handle
-																		// what
-																		// to do
-																		// if <
-																		// 2
-																		// teams
+		model.addAttribute("teams", teamService.findAllBelongingTo(principal));
 		return "add_match";
 	}
 

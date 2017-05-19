@@ -1,6 +1,7 @@
 package se.torgammelgard.web;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import se.torgammelgard.dto.TeamDto;
+import se.torgammelgard.exception.TeamOwnsMatchesException;
 import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.service.TeamService;
@@ -41,10 +44,13 @@ public class TeamPathController {
 	}
 	
 	@GetMapping(value = "/view")
-	public String view(Model model, Principal principal) throws UserNotFoundException {
+	public String view(@RequestParam(value = "matches_team_owns", required = false) Long matchesTeamOwns, Model model, Principal principal) throws UserNotFoundException {
 		TeamTable teamTable = new TeamTable();
-		teamTable.setTeams(teamService.findAllFor(principal));
+		teamTable.setTeams(teamService.findAllBelongingTo(principal));
 		model.addAttribute("teamTable", teamTable);
+		if (matchesTeamOwns != null) {
+			model.addAttribute("matches_team_owns", matchesTeamOwns);
+		}
 		return "/team_view";
 	}
 	
@@ -62,9 +68,10 @@ public class TeamPathController {
         } 
 
         Team team = new Team();
+        team.setTeamName(teamDto.getTeamName());
         team.setPlayerOneName(teamDto.getPlayerOneName());
         team.setPlayerTwoName(teamDto.getPlayerTwoName());
-        teamService.save(team, principal);
+        teamService.saveAndFlush(team, principal);
         
         return "redirect:/team/view";
 	}
@@ -72,9 +79,16 @@ public class TeamPathController {
 	@PostMapping(value = "/delete")
 	public String delete(
 			@ModelAttribute TeamTable teamTable, 
-			BindingResult result) {
+			BindingResult result,
+			Principal principal,
+			Model model) throws UserNotFoundException {
 		for (Long id : teamTable.getSelectedTeams()) {
-			teamService.delete(id);
+			try {
+				teamService.delete(id, principal);
+			} catch (TeamOwnsMatchesException e) {
+				List<Team> teams = teamService.findAllTeamsWithMatches(principal);
+				model.addAttribute("matches_team_owns", teams.size());
+			}
 		}
 		return "redirect:/team/view";
 	}
@@ -87,4 +101,5 @@ public class TeamPathController {
 		mav.setViewName("error");
 		return mav;
 	}
+	
 }

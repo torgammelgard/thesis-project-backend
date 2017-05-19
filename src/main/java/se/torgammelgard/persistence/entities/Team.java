@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -25,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import se.torgammelgard.Views;
 
 @Entity
+@NamedQuery(name = "Team.totalCount", query = "select count(*) from Team")
 @Table(name = "TEAMS")
 @PropertySource(value = "classpath:/messages.properties")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 			// not sure if needed
@@ -55,10 +57,10 @@ public class Team implements Serializable {
     @JsonView(Views.Public.class)
     private String playerTwoName;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamOne", orphanRemoval = false)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH}, mappedBy = "teamOne", orphanRemoval = false)
     private List<Match> team1_matches = new ArrayList<>(0);
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamTwo", orphanRemoval = false)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH}, mappedBy = "teamTwo", orphanRemoval = false)
     private List<Match> team2_matches = new ArrayList<>(0);
 
     public List<Match> getTeam1_matches() {

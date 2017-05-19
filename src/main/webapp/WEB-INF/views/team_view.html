@@ -21,13 +21,16 @@
 	<div th:replace="fragments/header :: header"></div>
 	
 	<div class="container">
+		<div th:if="${matches_team_owns} != null" class="alert alert-danger">
+			<span th:text="#{team_view.team_owns_matches}">--error team deletion--</span>
+		</div>
 		<form class="form" action="#" th:action="@{/team/delete}"
 			th:object="${teamTable}" method="post">
 			<table class="table table-hover table-responsive">
 				<thead>
 					<tr>
 						<th>-</th>
-						<th>#</th>
+						<!-- <th>#</th> -->
 						<th th:text="#{team_view.name}"></th>
 						<th th:text="#{team_view.player_one}"></th>
 						<th th:text="#{team_view.player_two}"></th>
@@ -37,11 +40,11 @@
 					<tr class="clickable-row" th:each="team : *{teams}">
 						<td><input type="checkbox" th:field="*{selectedTeams}"
 							th:value="${team.id}"></td>
-						<td th:text="${team.id}"><span class="glyphicon glyphicon-search"></span>__team_id</td>
+						<!-- <td th:text="${team.id}"><span class="glyphicon glyphicon-search"></span>__team_id</td> -->
 						<td th:text="${team.teamName}">__team_name</td>
-						<td th:text="${team.playerOneName} ? ${team.playerOneName}">__Team
+						<td th:text="${team.playerOneName}">__Team
 							1</td>
-						<td th:text="${team.playerTwoName} ? ${team.playerTwoName}">__Team
+						<td th:text="${team.playerTwoName}">__Team
 							2</td>
 					</tr>
 				</tbody>

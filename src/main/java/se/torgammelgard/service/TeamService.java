@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import se.torgammelgard.exception.TeamOwnsMatchesException;
 import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Team;
 
@@ -13,11 +14,13 @@ import se.torgammelgard.persistence.entities.Team;
 @Transactional
 public interface TeamService {
 
-    public List<Team> findAllFor(Principal principal) throws UserNotFoundException;
+    public List<Team> findAllBelongingTo(Principal principal) throws UserNotFoundException;
+    
+    public List<Team> findAllTeamsWithMatches(Principal principal) throws UserNotFoundException;
+    
+    public Team saveAndFlush(Team team, Principal principal) throws UserNotFoundException;
 
-    public Team save(Team team, Principal principal) throws UserNotFoundException;
-
-    public void delete(Long id);
+    public void delete(Long id, Principal principal) throws UserNotFoundException, TeamOwnsMatchesException;
     
     public Team find(Long id);
 }
