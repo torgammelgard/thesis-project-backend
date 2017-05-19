@@ -49,7 +49,7 @@ public class MatchPathController {
 	@RequestMapping("/view")
 	public String viewMatches(Model model, Principal principal) throws UserNotFoundException {
 		List<Match> matches = new ArrayList<>(0);
-		matches = matchService.findAllFor(principal);
+		matches = matchService.findAllBelongingTo(principal);
 		MatchTable matchTable = new MatchTable(matches);
 
 		model.addAttribute("matchTable", matchTable);
@@ -102,7 +102,7 @@ public class MatchPathController {
 		Match match = matchDto.convertToMatch();
 		match.setOwner(user);
 
-		matchService.save(match, principal);
+		matchService.saveAndFlush(match, principal);
 
 		return "redirect:/match/view";
 	}

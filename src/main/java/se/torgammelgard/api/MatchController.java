@@ -27,21 +27,16 @@ public class MatchController {
     @Autowired
     private MatchService matchService;
 
-//    @ModelAttribute("allMatches")
-//    public List<Match> populateMatches(Principal principal) {
-//        return matchService.findAll();
-//    }
-
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @JsonView(Views.Public.class)
     public @ResponseBody List<Match> getAllMatches(Principal principal) throws UserNotFoundException {
-        return matchService.findAllFor(principal);
+        return matchService.findAllBelongingTo(principal);
     }
 
     @PostMapping
     @JsonView(Views.Public.class)
     public @ResponseBody Match addMatch(@RequestBody Match match, Principal principal) {
-        return matchService.save(match, principal);
+        return matchService.saveAndFlush(match, principal);
     }
 }

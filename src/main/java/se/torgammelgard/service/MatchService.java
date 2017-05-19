@@ -13,9 +13,9 @@ import se.torgammelgard.persistence.entities.Match;
 @Transactional
 public interface MatchService {
 
-    public List<Match> findAllFor(Principal principal) throws UserNotFoundException;
+    public List<Match> findAllBelongingTo(Principal principal) throws UserNotFoundException;
     
-    public Match save(Match match, Principal principal);
+    public Match saveAndFlush(Match match, Principal principal);
 
     public void delete(long id);
 

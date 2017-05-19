@@ -1,7 +1,6 @@
 package se.torgammelgard.service.impl;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,26 +23,15 @@ public class MatchServiceImpl implements MatchService {
     UserRepository userRepository;
 
     @Override
-    public List<Match> findAllFor(Principal principal) throws UserNotFoundException {
-    	// check if user exists
-    	User owner = userRepository.findByUsername(principal.getName());
-    	if (owner == null) {
+    public List<Match> findAllBelongingTo(Principal principal) throws UserNotFoundException {
+    	User user = userRepository.findByUsername(principal.getName());
+    	if (user == null)
     		throw new UserNotFoundException();
-    	}
-    	
-    	// find all matches belonging to the user
-    	List<Match> matches = new ArrayList<>(0);
-        matchRepository.findAll().forEach((match) -> {
-        	if (match.getOwner().getId() == owner.getId()) {
-        		matches.add(match);
-        	}
-        });
-        
-        return matches;
+		return matchRepository.findAllBelongingTo(user);
     }
 
     @Override
-    public Match save(Match match, Principal principal) throws UserNotFoundException {
+    public Match saveAndFlush(Match match, Principal principal) throws UserNotFoundException {
         if (principal == null) {
             return null;
         }
@@ -52,7 +40,7 @@ public class MatchServiceImpl implements MatchService {
         	throw new UserNotFoundException();
         }
         match.setOwner(user);
-        return matchRepository.save(match);
+        return matchRepository.saveAndFlush(match);
     }
 
     @Override
