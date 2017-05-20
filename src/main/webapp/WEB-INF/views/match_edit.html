@@ -39,7 +39,7 @@
 			
 			<div class="panel panel-default col-xs-12">
 				<div class="form-group">
-					<label for="name" th:text="#{addmatchform.name}">--Match name--</label> <input
+					<label for="name" th:text="#{match_edit.name}">--Match name--</label> <input
 						id="name" class="form-control" type="text" th:field="*{name}"/>
 				</div>
 			</div>
@@ -47,7 +47,7 @@
 
 			<div class="panel panel-default col-xs-5" id="team_panel">
 				<div class="form-group">
-					<label for="teamoneselect" th:text="#{addmatchform.teamone}"></label>
+					<label for="teamoneselect" th:text="#{match_edit.team_one}"></label>
 					<select id="teamoneselect" class="form-control"
 						th:field="*{teamOne}">
 						<option th:each="team : ${teams}" th:value="${{team}}"
@@ -55,7 +55,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="teamtwoselect" th:text="#{addmatchform.teamtwo}"></label>
+					<label for="teamtwoselect" th:text="#{match_edit.team_two}"></label>
 					<select id="teamtwoselect" class="form-control"
 						th:field="*{teamTwo}">
 						<option th:each="team : ${teams}" th:value="${{team}}"

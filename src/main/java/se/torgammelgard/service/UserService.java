@@ -14,5 +14,7 @@ public interface UserService {
 	
 	public User registerNewUser(UserDto userDto) throws EmailExistsException;
 	
+	public User findById(Long id);
+	
 	public User update(UserForm userForm);
 }

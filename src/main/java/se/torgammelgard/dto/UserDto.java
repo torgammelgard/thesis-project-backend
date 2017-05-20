@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 public class UserDto {
 
 	@NotNull
-	@Size(min=1)
+	@Size(min=3)
 	private String username;
 	
 	@NotNull

@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,61 +54,67 @@ public class RootController {
     @GetMapping("/login")
     public ModelAndView login(
     		@RequestParam(value = "error", required = false) String error,
-    		@RequestParam(value = "logout", required = false) String logout) {
+    		Model model) {
     	
     	ModelAndView mav = new ModelAndView();
     	if (error != null) {
     		mav.addObject("error", "Login error");
-    	}
-    	if (logout != null) {
-    		mav.addObject("logout", "Logout successful");
     	}
     	
     	// add a loginDto for the login form
     	mav.addObject("loginDto", new LoginDto());
     	
     	// add a userDto for the registration form
-    	mav.addObject("userDto", new UserDto());
-    	
+    	if (!model.containsAttribute("userDto")) {
+    		mav.addObject("userDto", new UserDto());
+    	}
     	mav.setViewName("login");
     	
     	return mav;
     }
     
-    @PostMapping("/perform_login")
-    public ModelAndView performLogin(@Valid LoginDto logDto, BindingResult result, WebRequest request, Model model, Errors errors) {
-    	
-    	if (result.hasErrors()) {
-    		return new ModelAndView("/login", "errors", errors);
-    	}
-    	
-    	return new ModelAndView("index"); 
-    }
+//    @PostMapping("/perform_login")
+//    public ModelAndView performLogin(@Valid LoginDto logDto, BindingResult result, WebRequest request, Model model, Errors errors) {
+//    	
+//    	if (result.hasErrors()) {
+//    		return new ModelAndView("/login", "errors", errors);
+//    	}
+//    	
+//    	return new ModelAndView("index"); 
+//    }
     
     @PostMapping(value = "/registration", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public ModelAndView registration(@Valid @ModelAttribute UserDto userDto, BindingResult result, WebRequest request, Model model, Errors errors) 
-    		throws EmailExistsException {
-    	
-    	if (result.hasErrors()) {
-    		return new ModelAndView("login", "errors", errors);
-    	}
-    	
+    public ModelAndView registration(
+    		@Valid @ModelAttribute UserDto userDto,
+    		BindingResult result, 
+    		WebRequest request, 
+    		Model model, 
+    		Errors errors) throws EmailExistsException {
+    
     	User newUser = null;
-    	try {
-    		newUser = userService.registerNewUser(userDto);
-    	} catch (EmailExistsException e) {
+        
+    	if (!result.hasErrors()) {
+    		try {
+        		newUser = userService.registerNewUser(userDto);
+        	} catch (EmailExistsException e) {
+        		// TODO handle this exception
+        	}		
     	}
     	
-    	if (newUser != null) {
-    		model.asMap().clear(); // TODO test if this is needed or not
+    	if (!result.hasErrors()) {
     		return new ModelAndView("successful_registration", "new_user", newUser);
     	} else {
-    		return new ModelAndView("login");
+    		model.addAttribute("loginDto", new LoginDto());
+    		model.addAttribute("userDto", userDto);
+    		return new ModelAndView("login", model.asMap());
     	}
     }
     
-    @RequestMapping("/successfulregistration")
-    public String successfulRegistration(Model model, HttpServletRequest request) {
+    @RequestMapping("/successfulregistration/{id}")
+    public String successfulRegistration(@PathVariable String id,
+    		Model model, 
+    		HttpServletRequest request) {
+    	model.addAttribute("new_user", userService.findById(Long.parseLong(id)));
     	return "successful_registration";
     }
 }

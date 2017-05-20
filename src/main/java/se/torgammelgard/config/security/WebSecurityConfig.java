@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //.anyRequest().permitAll() // TODO change this
                 //.antMatchers("**/api/team").permitAll()
-                .antMatchers(new String[]{"/registration", "/successfulregistration", "/successful_logout", "/perform_login"}).permitAll()
+                .antMatchers(new String[]{"/registration", "/successfulregistration/**", "/successful_logout", "/perform_login"}).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll().loginProcessingUrl("/perform_login").failureUrl("/login?error")

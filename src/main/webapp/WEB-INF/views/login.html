@@ -22,17 +22,11 @@
 
 	<div th:replace="fragments/header :: header"></div>
 
-	<div th:if="${error != null}" class="alert alert-danger" role="alert">
-		<span>Error logging in</span>
-	</div>
-
-	<div th:if="${logout}" class="alert alert-info" role="alert">
-		<p>Logged out</p>
-	</div>
-	
-	
 	<div class="container">
-	
+		<div th:if="${error != null}" class="alert alert-danger" role="alert">
+			<span>Error logging in</span>
+		</div>
+
 		<!-- LOGIN -->
 
 		<div class="row">
@@ -45,9 +39,15 @@
 					</div>
 					<div class="panel-body">
 						<form class="form" th:action="@{/perform_login}" th:object="${loginDto}" method="post">
+							
+							
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+    							<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>    
+							</div>
+		
 							<div class="row">
 								<div class="col-xs-12 col-sm-12 col-md-12">
-									<div class="form-group" th:classappend="${#fields.hasErrors('username')}? has-error">
+									<div class="form-group" th:classappend="${#fields.hasErrors('password')}? has-error">
 										<div class="input-group">
 											<span class="input-group-addon"><span
 												class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -68,8 +68,8 @@
 											</span>
 											<input
 												type="password" class="form-control" th:field="*{password}"
-												id="loginPassword" placeholder="Password"> <span
-												class="input-group-btn">
+												id="loginPassword" placeholder="Password">
+												 <span class="input-group-btn">
 												<button class="btn btn-primary" type="submit">Go!</button>
 											</span>
 										</div>
@@ -96,10 +96,12 @@
 					</div>
 					<div class="panel-body">
 						<form class="form" th:action="@{/registration}" th:object="${userDto}" method="post">
+							
 							<div class="row">
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group" th:classappend="${#fields.hasErrors('username')}? has-error">
 										<input type="text" class="form-control" th:field="*{username}" id="registerUsername" placeholder="Username">
+										<span th:if="${#fields.hasErrors('username')}" class="help-block">At least 3 characters</span>
 									</div>
 								</div>
 							</div>
@@ -118,17 +120,20 @@
 							
 							<div class="form-group"  th:classappend="${#fields.hasErrors('email')}? has-error">
 								<input type="email" class="form-control" th:field="*{email}" id="registerEmail" placeholder="Email">
+								<span th:if="${#fields.hasErrors('email')}" class="help-block">At least 3 characters</span>
 							</div>
 							
 							<div class="row">
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group" th:classappend="${#fields.hasErrors('password')}? has-error"  >
 										<input type="password" class="form-control" th:field="*{password}" id="registerPasswordConfirm" placeholder="Password">
+										<span th:if="${#fields.hasErrors('password')}" class="help-block">At least 3 characters</span>
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group" th:classappend="${#fields.hasErrors('matchingPassword')}? has-error">
 										<input type="password" class="form-control" th:field="*{matchingPassword}" id="registerPasswordConfirm" placeholder="Confirm Password">
+										<span th:if="${#fields.hasErrors('matchingPassword')}" class="help-block">At least 3 characters</span>
 									</div>
 								</div>
 							</div>
