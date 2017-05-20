@@ -24,23 +24,27 @@
 	
 		<h1>Add a match!</h1>
 
-		<!--/*@thymesVar id="team" type="se.torgammelgard.persistence.entities.Team"*/-->
+		<!--/*@thymesVar id="matchDto" type="se.torgammelgard.dto.matchDto"*/-->
 		<!--/*@thymesVar id="tennisSet" type="se.torgammelgard.persistence.entities.TennisSet"*/-->
 		<!--/*@thymesVar id="tennisSetScore" type="se.torgammelgard.persistence.entities.TennisSetScore"*/-->
 		<form class="form-horizontal" action="#" th:action="@{/match/save}"
 			th:object="${matchDto}" method="post">
 
 			<div class="panel panel-default col-xs-12">
-				<div class="form-group">
-					<label for="name" th:text="#{addmatchform.name}">--Match name--</label> <input
+				<div class="form-group col-xs-6">
+					<label for="name" th:text="#{add_match.name}">--Match name--</label> <input
 						id="name" class="form-control" type="text" th:field="*{name}"/>
+				</div>
+				<div class="form-group col-xs-6 pull-right">
+					<label for="date" th:text="#{add_match.date}">--Date name--</label>
+					<input id="date" class="form-control" type="date" th:field="*{date}">
 				</div>
 			</div>
 			
 
 			<div class="panel panel-default col-xs-5" id="team_panel">
 				<div class="form-group">
-					<label for="teamoneselect" th:text="#{addmatchform.teamone}"></label>
+					<label for="teamoneselect" th:text="#{add_match.teamone}"></label>
 					<select id="teamoneselect" class="form-control"
 						th:field="*{teamOne}">
 						<option th:each="team : ${teams}" th:value="${{team}}"
@@ -48,7 +52,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="teamtwoselect" th:text="#{addmatchform.teamtwo}"></label>
+					<label for="teamtwoselect" th:text="#{add_match.teamtwo}"></label>
 					<select id="teamtwoselect" class="form-control"
 						th:field="*{teamTwo}">
 						<option th:each="team : ${teams}" th:value="${{team}}"

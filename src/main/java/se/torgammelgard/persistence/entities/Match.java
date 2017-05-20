@@ -3,6 +3,7 @@ package se.torgammelgard.persistence.entities;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,6 +35,9 @@ public class Match {
 
     @JsonView(Views.Public.class)
     private Boolean finished;
+    
+    @JsonView(Views.Public.class)
+    private Date date;
     
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "team_1_id", foreignKey = @ForeignKey(name = "TEAM_1_ID_FK"))
@@ -130,5 +134,13 @@ public class Match {
 
 	public void setFinished(Boolean finished) {
 		this.finished = finished;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 }

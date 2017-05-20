@@ -29,6 +29,7 @@
 						<th></th>
 						<th>Edit</th>
 						<!-- <th>#</th>  -->
+						<th th:text="#{view_matches.date}"></th>
 						<th th:text="#{view_matches.match}"></th>
 						<th th:text="#{view_matches.team_one}"></th>
 						<th th:text="#{view_matches.team_two}"></th>
@@ -44,6 +45,7 @@
 							</a>
 						</td>
 						<!-- <td th:text="${match.id}">__match_id</td>  -->
+						<td th:text="${#dates.format(match.date, 'yyyy-MM-dd')}">__date__</td>
 						<td th:text="${match.name}">__match_name</td>
 						<td th:text="${match.teamOne}">__Team 1</td>
 						<td th:text="${match.teamTwo}">__Team 2</td>

@@ -1,9 +1,11 @@
 package se.torgammelgard.dto;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.persistence.entities.Team;
@@ -18,6 +20,9 @@ public class MatchDto {
     private String name;
 
     private Boolean finished;
+	
+    @DateTimeFormat(iso = ISO.DATE)
+    private Date date;
     
     private Team teamOne;
     
@@ -39,12 +44,15 @@ public class MatchDto {
 			tennisSets.add(tennisSet);
 		}
 		this.tennisSets = tennisSets;
+		this.date = new Date();
 	}
+	
 	public static MatchDto build(Match match) {
 		MatchDto matchDto = new MatchDto();
 		matchDto.setId(match.getId());
 		matchDto.setName(match.getName());
 		matchDto.setFinished(match.getFinished());
+		matchDto.setDate(match.getDate());
 		matchDto.setOwner(match.getOwner());
 		matchDto.setTeamOne(match.getTeamOne());
 		matchDto.setTeamTwo(match.getTeamTwo());
@@ -65,6 +73,7 @@ public class MatchDto {
 		match.setId(this.getId());
 		match.setName(this.getName());
 		match.setFinished(this.getFinished());
+		match.setDate(this.getDate());
 		match.setTeamOne(this.getTeamOne());
 		match.setTeamTwo(this.getTeamTwo());
 		match.setTennisSets(this.getTennisSets());
@@ -128,5 +137,13 @@ public class MatchDto {
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
-
+	
+	public Date getDate() {
+		return date;
+	}
+	
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
 }
