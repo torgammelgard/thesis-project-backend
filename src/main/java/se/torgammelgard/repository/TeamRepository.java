@@ -15,8 +15,8 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
 	@Query("select t from Team t where t.owner = ?1")
 	public List<Team> findAllTeamsBelongingTo(User user);
 	
-	@Query("select t from Team t where ((t.owner = ?1) AND ((t.team1_matches IS NOT EMPTY) OR (t.team2_matches IS NOT EMPTY)))")
-	public List<Team> findAllTeamsWithMatches(User owner);
+	@Query("select t from Team t where t.id = ?1 and t.owner = ?2")
+	public Team findOneForUser(Long id, User user);
 	
 	public long totalCount();
 }

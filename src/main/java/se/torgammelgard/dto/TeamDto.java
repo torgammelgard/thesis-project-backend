@@ -2,12 +2,16 @@ package se.torgammelgard.dto;
 
 import javax.validation.constraints.NotNull;
 
+import se.torgammelgard.persistence.entities.Team;
+
 public class TeamDto {
 	
 	public TeamDto() {
 		super();
 	}
 
+	private Long id;
+	
 	@NotNull
 	private String teamName;
 	
@@ -15,6 +19,15 @@ public class TeamDto {
 	
 	private String playerTwoName;
 
+	public static TeamDto build(Team team) {
+		TeamDto teamDto = new TeamDto();
+		teamDto.setId(team.getId());
+		teamDto.setTeamName(team.getTeamName());
+		teamDto.setPlayerOneName(team.getPlayerOneName());
+		teamDto.setPlayerTwoName(team.getPlayerTwoName());
+		return teamDto;
+	}
+	
 	public String getTeamName() {
 		return teamName;
 	}
@@ -37,6 +50,14 @@ public class TeamDto {
 
 	public void setPlayerTwoName(String playerTwoName) {
 		this.playerTwoName = playerTwoName;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }

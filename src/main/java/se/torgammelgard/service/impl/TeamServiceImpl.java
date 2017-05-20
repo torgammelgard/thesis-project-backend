@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import se.torgammelgard.dto.TeamDto;
 import se.torgammelgard.exception.TeamOwnsMatchesException;
 import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Team;
@@ -31,12 +32,12 @@ public class TeamServiceImpl implements TeamService {
     	return teamRepository.findAllTeamsBelongingTo(user);
     }
     
-    @Override
-    public List<Team> findAllTeamsWithMatches(Principal principal) throws UserNotFoundException {
-    	User user = findUser(principal);
-    	return teamRepository.findAllTeamsWithMatches(user);
-    }
-    
+	@Override
+	public Team find(Long id, Principal principal) throws UserNotFoundException {
+		User user = findUser(principal);
+		return teamRepository.findOneForUser(id, user);
+	}
+	
     @Override
     public Team saveAndFlush(Team team, Principal principal) throws UserNotFoundException {
         if (team == null)
@@ -49,8 +50,8 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public void delete(Long id, Principal principal) throws UserNotFoundException, TeamOwnsMatchesException {
     	User user = findUser(principal);
-    	List<Team> teams = teamRepository.findAllTeamsWithMatches(user);
-    	if (teams.isEmpty()) {
+    	Team team = teamRepository.findOne(id);
+    	if (team != null && team.getOwner() == user && (team.getTeam1_matches().isEmpty() && team.getTeam2_matches().isEmpty())) {
     		teamRepository.delete(id);
     	} else {
     		throw new TeamOwnsMatchesException();
@@ -69,4 +70,16 @@ public class TeamServiceImpl implements TeamService {
     	}
     	return user;
     }
+
+	@Override
+	public Team update(TeamDto teamDto, Principal principal) throws UserNotFoundException {
+    	User user = findUser(principal);
+    	Team team = new Team();
+    	team.setId(teamDto.getId());
+    	team.setTeamName(teamDto.getTeamName());
+    	team.setOwner(user);
+    	team.setPlayerOneName(teamDto.getPlayerOneName());
+    	team.setPlayerTwoName(teamDto.getPlayerTwoName());
+    	return teamRepository.saveAndFlush(team);
+	}
 }

@@ -26,8 +26,8 @@
 			<table class="table table-hover table-responsive">
 				<thead>
 					<tr>
-						<th>Edit</th>
 						<th></th>
+						<th>Edit</th>
 						<!-- <th>#</th>  -->
 						<th th:text="#{view_matches.match}"></th>
 						<th th:text="#{view_matches.team_one}"></th>
@@ -36,13 +36,13 @@
 				</thead>
 				<tbody>
 					<tr class="clickable-row" th:each="match : *{matches}">
+						<td><input type="checkbox" th:field="*{selectedMatches}"
+							th:value="${match.id}"></td>
 						<td>
 							<a th:href="@{/match/edit/} + ${match.id}">
 								<span class="edit glyphicon glyphicon-pencil"></span>
 							</a>
 						</td>
-						<td><input type="checkbox" th:field="*{selectedMatches}"
-							th:value="${match.id}"></td>
 						<!-- <td th:text="${match.id}">__match_id</td>  -->
 						<td th:text="${match.name}">__match_name</td>
 						<td th:text="${match.teamOne}">__Team 1</td>

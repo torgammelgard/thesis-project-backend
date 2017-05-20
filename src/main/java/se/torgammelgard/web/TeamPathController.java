@@ -1,7 +1,6 @@
 package se.torgammelgard.web;
 
 import java.security.Principal;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -14,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,6 +76,30 @@ public class TeamPathController {
         return "redirect:/team/view";
 	}
 	
+	@GetMapping("/edit/{id}")
+	public String editMatch(@PathVariable Long id, Model model, Principal principal) {
+		// populate model with match (id)
+		Team team = teamService.find(id, principal);
+		TeamDto teamDto = TeamDto.build(team);
+		model.addAttribute("teamDto", teamDto);
+		return "team_edit";
+	}
+	
+	@PostMapping("/edit")
+	public String doEditMatch(
+			@ModelAttribute TeamDto teamDto, 
+			BindingResult result,
+			Model model,
+			Principal principal) throws UserNotFoundException  {
+		if (result.hasErrors()) {
+			model.addAttribute("errors", result.getAllErrors());
+			return "error_page";
+		}
+		
+		teamService.update(teamDto, principal);
+		return "redirect:/team/view";
+	}
+	
 	@PostMapping(value = "/delete")
 	public String delete(
 			@ModelAttribute TeamTable teamTable, 
@@ -86,8 +110,9 @@ public class TeamPathController {
 			try {
 				teamService.delete(id, principal);
 			} catch (TeamOwnsMatchesException e) {
-				List<Team> teams = teamService.findAllTeamsWithMatches(principal);
-				model.addAttribute("matches_team_owns", teams.size());
+				Team team = teamService.find(id);
+				int total_matches = team.getTeam1_matches().size() + team.getTeam2_matches().size();
+				model.addAttribute("matches_team_owns", total_matches);
 			}
 		}
 		return "redirect:/team/view";

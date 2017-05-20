@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>View matches</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" th:href="@{/styles/main.css}">
+</head>
+<body>
+
+	<div th:replace="fragments/header :: header"></div>
+	
+	<div class="container">
+	
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+				<h1>Edit team!</h1>
+			</div>
+		</div>
+
+		<!--/*@thymesVar id="teamDto" type="se.torgammelgard.dto.TeamDto"*/-->
+		<form class="form" action="#" th:action="@{/team/edit}"
+			th:object="${teamDto}" method="post">
+			
+			<input type="hidden" th:field="*{id}">
+			
+			<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+				<div class="form-group">
+					<label for="name" th:text="#{add_team.name}">--Team name--</label> <input
+						id="name" class="form-control" type="text" th:field="*{teamName}"/>
+				</div>
+				<div class="form-group">
+					<label for="name" th:text="#{add_team.player_one_name}">--Player two name--</label> <input
+						id="name" class="form-control" type="text" th:field="*{playerOneName}"/>
+				</div>
+				<div class="form-group">
+					<label for="name" th:text="#{add_team.player_two_name}">--Player two name--</label> <input
+						id="name" class="form-control" type="text" th:field="*{playerTwoName}"/>
+				</div>
+				<button type="submit" class="btn btn-primary pull-right" th:text="#{add_team.submit}">--Submit--</button>
+			</div>
+			
+			
+		</form>
+
+	</div>
+	
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

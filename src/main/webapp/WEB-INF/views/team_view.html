@@ -30,6 +30,7 @@
 				<thead>
 					<tr>
 						<th>-</th>
+						<th>Edit</th>
 						<!-- <th>#</th> -->
 						<th th:text="#{team_view.name}"></th>
 						<th th:text="#{team_view.player_one}"></th>
@@ -40,6 +41,11 @@
 					<tr class="clickable-row" th:each="team : *{teams}">
 						<td><input type="checkbox" th:field="*{selectedTeams}"
 							th:value="${team.id}"></td>
+						<td>
+							<a th:href="@{/team/edit/} + ${team.id}">
+								<span class="edit glyphicon glyphicon-pencil"></span>
+							</a>
+						</td>
 						<!-- <td th:text="${team.id}"><span class="glyphicon glyphicon-search"></span>__team_id</td> -->
 						<td th:text="${team.teamName}">__team_name</td>
 						<td th:text="${team.playerOneName}">__Team
