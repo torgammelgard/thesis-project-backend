@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import se.torgammelgard.dto.MatchDto;
 import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.persistence.entities.User;
@@ -29,6 +30,14 @@ public class MatchServiceImpl implements MatchService {
     		throw new UserNotFoundException();
 		return matchRepository.findAllBelongingTo(user);
     }
+    
+    @Override
+    public Match find(Long id, Principal principal) throws UserNotFoundException {
+    	User user = userRepository.findByUsername(principal.getName());
+    	if (user == null)
+    		throw new UserNotFoundException();
+    	return matchRepository.findOneForUser(id, user);
+    }
 
     @Override
     public Match saveAndFlush(Match match, Principal principal) throws UserNotFoundException {
@@ -39,10 +48,26 @@ public class MatchServiceImpl implements MatchService {
         if (user == null) {
         	throw new UserNotFoundException();
         }
+        
+        //matchRepository.findOne(match.getId())
         match.setOwner(user);
         return matchRepository.saveAndFlush(match);
     }
 
+    @Override
+    public Match update(MatchDto matchDto, Principal principal) {
+    	User user = userRepository.findByUsername(principal.getName());
+		Match match = new Match();
+		match.setId(matchDto.getId());
+		match.setName(matchDto.getName());
+		match.setFinished(matchDto.getFinished());
+		match.setTeamOne(matchDto.getTeamOne());
+		match.setTeamTwo(matchDto.getTeamTwo());
+		match.setTennisSets(matchDto.getTennisSets());
+		match.setOwner(user);
+    	return matchRepository.save(match);
+    }
+    
     @Override
     public void delete(long id) {
         matchRepository.delete(id);

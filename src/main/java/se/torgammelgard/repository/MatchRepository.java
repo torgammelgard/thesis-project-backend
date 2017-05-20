@@ -14,4 +14,7 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
 
 	@Query("select m from Match m where m.owner = ?1")
 	public List<Match> findAllBelongingTo(User user);
+	
+	@Query("select m from Match m where m.id = ?1 and m.owner = ?2")
+	public Match findOneForUser(Long id, User user);
 }

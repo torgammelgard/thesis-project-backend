@@ -1,6 +1,8 @@
 package se.torgammelgard.persistence.entities;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -87,6 +89,14 @@ public class Match {
 	}
 
 	public List<TennisSet> getTennisSets() {
+		Collections.sort(tennisSets, new Comparator<TennisSet>() {
+
+			@Override
+			public int compare(TennisSet set1, TennisSet set2) {
+				return set1.getSetNumber() - set2.getSetNumber();
+			}
+			
+		});
 		return tennisSets;
 	}
 
@@ -111,6 +121,10 @@ public class Match {
 	}
 
 	public Boolean isFinished() {
+		return finished;
+	}
+	
+	public Boolean getFinished() {
 		return finished;
 	}
 

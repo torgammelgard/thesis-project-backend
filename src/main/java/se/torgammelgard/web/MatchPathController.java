@@ -16,15 +16,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import se.torgammelgard.dto.MatchDto;
 import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Match;
+import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.persistence.entities.User;
 import se.torgammelgard.service.MatchService;
 import se.torgammelgard.service.TeamService;
@@ -56,6 +59,39 @@ public class MatchPathController {
 		return "view_matches";
 	}
 
+	@GetMapping("/edit/{id}")
+	public String editMatch(@PathVariable Long id, Model model, Principal principal) {
+		// populate model with match (id)
+		Match match = matchService.find(id, principal);
+		MatchDto matchDto = MatchDto.build(match);
+		matchDto.setId(id);
+		List<Team> teams = teamService.findAllBelongingTo(principal);
+		model.addAttribute("matchDto", matchDto);
+		model.addAttribute("teams", teams);
+		return "match_edit";
+	}
+	
+	@PostMapping("/edit")
+	public String doEditMatch(
+			@ModelAttribute MatchDto matchDto, 
+			BindingResult result,
+			Model model,
+			Principal principal) throws UserNotFoundException {
+		if (result.hasErrors()) {
+			model.addAttribute("errors", result.getAllErrors());
+			return "error_page";
+		}
+
+		// Check if user is logged in (exists)
+		User user = userService.findByUsername(principal.getName());
+		if (principal == null || user == null) {
+			throw new UserNotFoundException();
+		}
+		matchService.update(matchDto, principal);
+		//return (updatedMatch != null) ? "redirect:/match/view" : "redirect:/match/view?error=";
+		return "redirect:/match/view";
+	}
+	
 	@RequestMapping(value = "/delete_page", method = RequestMethod.POST)
 	public String delete(@ModelAttribute MatchTable matchTable) {
 		for (Long id : matchTable.getSelectedMatches()) {

@@ -68,7 +68,12 @@ public class AccountPathController {
 			userForm.setPassword(encoder.encode((userForm.getPassword())));
 		}
 		
-		userService.update(userForm);
+		
+		// Pass the result of the edit
+		boolean edit_result;
+		edit_result = userService.update(userForm) != null; 
+		model.addAttribute("edit", edit_result);
+
 		return "redirect:/account";
 	}
 	

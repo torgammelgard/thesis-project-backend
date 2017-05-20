@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Edit matches</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" th:href="@{/styles/main.css}">
+<link rel="stylesheet" th:href="@{/styles/add_pages.css}">
+</head>
+<body>
+
+	<div th:replace="fragments/header :: header"></div>
+	
+	<div class="container">
+	
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+				<h1>Edit match!</h1>
+			</div>
+		</div>
+
+
+		<!--/*@thymesVar id="matchDto" type="se.torgammelgard.persistence.entities.MatchDto"*/-->
+		<!--/*@thymesVar id="tennisSet" type="se.torgammelgard.persistence.entities.TennisSet"*/-->
+		<!--/*@thymesVar id="tennisSetScore" type="se.torgammelgard.persistence.entities.TennisSetScore"*/-->
+		<form class="form-horizontal" action="#" th:action="@{/match/edit}"
+			th:object="${matchDto}" method="post">
+			
+			<input type="hidden" th:field="*{id}">
+			
+			<div class="panel panel-default col-xs-12">
+				<div class="form-group">
+					<label for="name" th:text="#{addmatchform.name}">--Match name--</label> <input
+						id="name" class="form-control" type="text" th:field="*{name}"/>
+				</div>
+			</div>
+			
+
+			<div class="panel panel-default col-xs-5" id="team_panel">
+				<div class="form-group">
+					<label for="teamoneselect" th:text="#{addmatchform.teamone}"></label>
+					<select id="teamoneselect" class="form-control"
+						th:field="*{teamOne}">
+						<option th:each="team : ${teams}" th:value="${{team}}"
+							th:text="${team}"></option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="teamtwoselect" th:text="#{addmatchform.teamtwo}"></label>
+					<select id="teamtwoselect" class="form-control"
+						th:field="*{teamTwo}">
+						<option th:each="team : ${teams}" th:value="${{team}}"
+							th:text="${team}"></option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="panel panel-default col-xs-7">
+				<table class="table">
+	
+					<thead>
+						<tr>
+							<th class="text-center" th:each="tennisSet : ${matchDto.tennisSets}" th:text="${tennisSet.setNumber}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th:block th:each="tennisSet, stat : *{tennisSets}">
+								<td class="text-center">
+									<input class="form-control text-center input-lg no-spinners" 
+									type="number" th:field="*{tennisSets[__${stat.index}__].tennisSetScore.scoreTeamOne}">
+								</td>
+							</th:block>
+						</tr>
+						<tr>
+							<th:block th:each="tennisSet, stat : *{tennisSets}">
+								<td class="text-center">
+									<input class="form-control text-center input-lg no-spinners" 
+									type="number" th:field="*{tennisSets[__${stat.index}__].tennisSetScore.scoreTeamTwo}">
+								</td>
+							</th:block>
+						</tr>
+					</tbody>
+	
+				</table>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="checkbox">
+						<label><input type="checkbox" th:field="*{finished}">--Finished--</label>
+					</div>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary pull-right" th:text="#{match_edit.edit}">
+				--Edit--
+			</button>
+		</form>
+
+	</div>
+	
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
