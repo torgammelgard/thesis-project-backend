@@ -26,7 +26,7 @@
 		</div>
 		<form class="form" action="#" th:action="@{/team/delete}"
 			th:object="${teamTable}" method="post">
-			<table class="table table-hover table-responsive">
+			<table th:if="${not #lists.isEmpty(teamTable.teams)}" class="table table-hover table-responsive">
 				<thead>
 					<tr>
 						<th>-</th>

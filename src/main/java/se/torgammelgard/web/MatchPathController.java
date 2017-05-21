@@ -63,7 +63,7 @@ public class MatchPathController {
 		// populate model with match (id)
 		Match match = matchService.find(id, principal);
 		MatchDto matchDto = MatchDto.build(match);
-		matchDto.setId(id);
+		//matchDto.setId(id);
 		List<Team> teams = teamService.findAllBelongingTo(principal);
 		model.addAttribute("matchDto", matchDto);
 		model.addAttribute("teams", teams);
@@ -82,8 +82,7 @@ public class MatchPathController {
 		}
 
 		// Check if user is logged in (exists)
-		User user = userService.findByUsername(principal.getName());
-		if (principal == null || user == null) {
+		if (principal == null || userService.findByUsername(principal.getName()) == null) {
 			throw new UserNotFoundException();
 		}
 		matchService.update(matchDto, principal);

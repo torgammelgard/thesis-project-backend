@@ -4,11 +4,13 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Edit matches</title>
+<title>Edit match</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
@@ -29,7 +31,8 @@
 		</div>
 
 
-		<!--/*@thymesVar id="matchDto" type="se.torgammelgard.persistence.entities.MatchDto"*/-->
+		<!--/*@thymesVar id="matchDto" type="se.torgammelgard.dto.MatchDto"*/-->
+		<!--/*@thymesVar id="team" type="se.torgammelgard.persistence.entities.Team"*/-->
 		<!--/*@thymesVar id="tennisSet" type="se.torgammelgard.persistence.entities.TennisSet"*/-->
 		<!--/*@thymesVar id="tennisSetScore" type="se.torgammelgard.persistence.entities.TennisSetScore"*/-->
 		<form class="form-horizontal" action="#" th:action="@{/match/edit}"
@@ -38,9 +41,13 @@
 			<input type="hidden" th:field="*{id}">
 			
 			<div class="panel panel-default col-xs-12">
-				<div class="form-group">
+				<div class="form-group col-xs-12 col-sm-6">
 					<label for="name" th:text="#{match_edit.name}">--Match name--</label> <input
 						id="name" class="form-control" type="text" th:field="*{name}"/>
+				</div>
+				<div class="form-group col-xs-12 col-sm-6 pull-right">
+					<label for="date" th:text="#{match_edit.date}">--Date name--</label>
+					<input id="date" class="form-control" type="date" th:field="*{date}">
 				</div>
 			</div>
 			
@@ -96,7 +103,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="checkbox">
-						<label><input type="checkbox" th:field="*{finished}">--Finished--</label>
+						<label><input type="checkbox" th:field="*{finished}"><span th:text="#{match_edit.finished}">--Finished--</span></label>
 					</div>
 				</div>
 			</div>

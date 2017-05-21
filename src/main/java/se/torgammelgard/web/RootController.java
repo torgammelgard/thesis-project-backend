@@ -109,12 +109,12 @@ public class RootController {
     		return new ModelAndView("login", model.asMap());
     	}
     }
-    
-    @RequestMapping("/successfulregistration/{id}")
-    public String successfulRegistration(@PathVariable String id,
-    		Model model, 
-    		HttpServletRequest request) {
-    	model.addAttribute("new_user", userService.findById(Long.parseLong(id)));
-    	return "successful_registration";
-    }
+//    
+//    @RequestMapping("/successfulregistration/{id}")
+//    public String successfulRegistration(@PathVariable String id,
+//    		Model model, 
+//    		HttpServletRequest request) {
+//    	model.addAttribute("new_user", userService.findById(Long.parseLong(id)));
+//    	return "successful_registration";
+//    }
 }

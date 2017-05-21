@@ -125,4 +125,23 @@ public class User implements Serializable {
 	public Boolean getEnabled() {
 		return enabled;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+	    if (this == o) {
+	        return true;
+	    }
+	    if (o == null || getClass() != o.getClass()) {
+	        return false;
+	    }
+
+	    User that = (User) o;
+
+	    return getId() == that.getId();
+	}
+
+	@Override
+	public int hashCode() {
+	    return Long.valueOf(getId()).hashCode();
+	}
 }

@@ -57,10 +57,10 @@ public class Team implements Serializable {
     @JsonView(Views.Public.class)
     private String playerTwoName;
 
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH}, mappedBy = "teamOne", orphanRemoval = false)
+    @OneToMany(mappedBy = "teamOne", orphanRemoval = true)
     private List<Match> team1_matches = new ArrayList<>(0);
 
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH}, mappedBy = "teamTwo", orphanRemoval = false)
+    @OneToMany(mappedBy = "teamTwo", orphanRemoval = true)
     private List<Match> team2_matches = new ArrayList<>(0);
 
     public List<Match> getTeam1_matches() {
@@ -166,5 +166,24 @@ public class Team implements Serializable {
 			}
 		}
 		return builder.toString();
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+	    if (this == o) {
+	        return true;
+	    }
+	    if (o == null || getClass() != o.getClass()) {
+	        return false;
+	    }
+
+	    Team that = (Team) o;
+
+	    return getId() == that.getId();
+	}
+
+	@Override
+	public int hashCode() {
+	    return Long.valueOf(getId()).hashCode();
 	}
 }

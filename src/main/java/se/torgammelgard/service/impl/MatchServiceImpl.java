@@ -3,6 +3,8 @@ package se.torgammelgard.service.impl;
 import java.security.Principal;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -61,11 +63,12 @@ public class MatchServiceImpl implements MatchService {
 		match.setId(matchDto.getId());
 		match.setName(matchDto.getName());
 		match.setFinished(matchDto.getFinished());
+		match.setDate(matchDto.getDate());
 		match.setTeamOne(matchDto.getTeamOne());
 		match.setTeamTwo(matchDto.getTeamTwo());
 		match.setTennisSets(matchDto.getTennisSets());
 		match.setOwner(user);
-    	return matchRepository.save(match);
+    	return matchRepository.saveAndFlush(match);
     }
     
     @Override
