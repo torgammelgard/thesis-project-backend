@@ -20,6 +20,7 @@ targetCompatibility = 1.8
 dependencies {
 
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.0-b05'
+	compile group: 'javax.interceptor', name: 'javax.interceptor-api', version: '1.2'
 
 	// Validation
 	compile group: 'javax.validation', name: 'validation-api', version: '1.1.0.Final'

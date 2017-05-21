@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,9 @@ import se.torgammelgard.persistence.entities.Game;
 import se.torgammelgard.repository.GameRepository;
 import se.torgammelgard.service.GameService;
 
+/*
+ * A dummy controller for the dummy entity Game. Used for testing during production.
+ */
 @RestController
 @RequestMapping("api/game")
 public class GameController {
@@ -31,15 +35,21 @@ public class GameController {
     @Autowired
     private GameRepository gameRepo;
     
-    @RequestMapping(method = RequestMethod.GET)
+    /*
+     *  Mapping for getting a list of games sorted on their id in ascending order.
+     */
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @JsonView(Views.Public.class)
     public @ResponseBody List<Game> getGames() {
     	List<Game> games = gameRepo.findAll(new Sort(Sort.Direction.ASC, new String[]{"id"}));
-        //List<Game> games = gameService.findAll();
         return games;
     }
     
+    /*
+     * Mapping for getting a list of games of a certain version using a path variable
+     * @param a Long (version number)
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/{version}")
     @ResponseStatus(HttpStatus.OK)
     @JsonView(Views.Public.class)
@@ -49,6 +59,10 @@ public class GameController {
         return games;
     }
     
+    /*
+     * Post mapping for saving a game.
+     * @param a Game to be saved
+     */
     @PostMapping
     @JsonView(Views.Public.class)
     public @ResponseBody Game saveGame(@RequestBody Game game) {
