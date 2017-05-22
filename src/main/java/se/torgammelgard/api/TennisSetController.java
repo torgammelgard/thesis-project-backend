@@ -18,6 +18,9 @@ import se.torgammelgard.Views;
 import se.torgammelgard.persistence.entities.TennisSet;
 import se.torgammelgard.service.TennisSetService;
 
+/*
+ * API - A rest controller for handling teams.
+ */
 @Controller
 @RequestMapping("/api/tennisset")
 public class TennisSetController {
@@ -25,6 +28,10 @@ public class TennisSetController {
 	@Autowired
 	private TennisSetService tennisSetService;
 
+	/*
+	 * Get mapping for listing all persisted tennis sets
+	 * @return a list of all tennis setss
+	 */
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	@JsonView(Views.Public.class)
@@ -32,6 +39,11 @@ public class TennisSetController {
 		return tennisSetService.findAll();
 	}
 	
+	/*
+	 * Post mapping for saving a tennis set
+	 * @param a tennis set to be persisted
+	 * @return the persisted tennis set
+	 */
 	@PostMapping
 	@JsonView(Views.Public.class)
 	public @ResponseBody TennisSet saveTennisSet(@RequestBody TennisSet tennisSet) {

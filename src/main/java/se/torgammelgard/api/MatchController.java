@@ -20,6 +20,9 @@ import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.service.MatchService;
 
+/*
+ * API - A rest controller for handling matches.
+ */
 @RestController
 @RequestMapping("/api/match")
 public class MatchController {
@@ -27,6 +30,11 @@ public class MatchController {
     @Autowired
     private MatchService matchService;
 
+    /*
+     * Get mapping for retrieving a list of matches, belonging to the logged in user.
+     * @param a principal (authenticated user)
+     * @return a list of all matches belonging to the authenticated user
+     */
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @JsonView(Views.Public.class)
@@ -34,6 +42,13 @@ public class MatchController {
         return matchService.findAllBelongingTo(principal);
     }
 
+
+    /*
+     * Post mapping for storing a match.
+     * @param a Match
+     * @param a principal (authenticated user)
+     * @return the persisted match
+     */
     @PostMapping
     @JsonView(Views.Public.class)
     public @ResponseBody Match addMatch(@RequestBody Match match, Principal principal) {

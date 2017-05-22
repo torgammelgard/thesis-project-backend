@@ -2,7 +2,6 @@ package se.torgammelgard.api;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,6 +20,9 @@ import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.service.TeamService;
 
+/*
+ * API - A rest controller for handling teams.
+ */
 @Controller
 @RequestMapping("/api/team")
 public class TeamController {
@@ -28,27 +30,34 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
+    /*
+     * Get mapping for retrieving a list of teams, belonging to the logged in user.
+     * @param a principal (authenticated user)
+     * @return a list of teams belonging to the authenticated user
+     */
     @GetMapping
     @JsonView(Views.Public.class)
     public @ResponseBody List<Team> getAllTeams(Principal principal) throws UserNotFoundException {
         return teamService.findAllBelongingTo(principal);
     }
 
+
+    /*
+     * Post mapping for storing a team. 
+     * @param a Team
+     * @param a principal (authenticated user)
+     * @return the persisted team
+     */
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @JsonView(Views.Public.class)
     public @ResponseBody Team addTeam(@RequestBody Team team, Principal principal) throws UserNotFoundException{
     	return teamService.saveAndFlush(team, principal);
     }
     
-    // TODO should be deleted later and replaced with POST
-    @RequestMapping("/add")
-    @JsonView(Views.Public.class)
-    public @ResponseBody Team addRandomTeam(Principal principal) {
-        Team team = new Team();
-        team.setTeamName(String.format("Team name with random number %d", new Random().nextInt(100)));
-        return teamService.saveAndFlush(team, principal);
-    }
-    
+    /*
+     * An exception handler. Handles all exceptions in this controller.
+     * @return a message of what caused the error
+     */
 	@ExceptionHandler
 	public @ResponseBody String exHandle(Exception e) {
 		return e.getCause().getMessage();
