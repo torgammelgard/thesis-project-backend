@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.mysql.cj.core.exceptions.PasswordExpiredException;
+
 import se.torgammelgard.dto.UserDto;
 import se.torgammelgard.exception.EmailExistsException;
+import se.torgammelgard.exception.PasswordMismatchException;
 import se.torgammelgard.form.UserForm;
 import se.torgammelgard.persistence.entities.Role;
 import se.torgammelgard.persistence.entities.User;
@@ -36,10 +39,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User registerNewUser(UserDto userDto) throws EmailExistsException {
+	public User registerNewUser(UserDto userDto) throws EmailExistsException, PasswordMismatchException {
 
 		if (userRepository.findByUsername(userDto.getUsername()) != null) {
 			throw new EmailExistsException();
+		}
+		
+		if (!userDto.getPassword().equals(userDto.getMatchingPassword())) {
+			throw new PasswordMismatchException();
 		}
 		
 		Role adminRole = roleRepository.findByName("ROLE_ADMIN");

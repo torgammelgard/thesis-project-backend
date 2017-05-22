@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import se.torgammelgard.dto.UserDto;
 import se.torgammelgard.exception.EmailExistsException;
+import se.torgammelgard.exception.PasswordMismatchException;
 import se.torgammelgard.form.UserForm;
 import se.torgammelgard.persistence.entities.User;
 
@@ -12,7 +13,7 @@ public interface UserService {
 
 	public User findByUsername(String username);
 	
-	public User registerNewUser(UserDto userDto) throws EmailExistsException;
+	public User registerNewUser(UserDto userDto) throws EmailExistsException, PasswordMismatchException;
 	
 	public User findById(Long id);
 	

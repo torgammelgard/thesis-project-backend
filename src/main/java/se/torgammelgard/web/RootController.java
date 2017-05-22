@@ -3,7 +3,6 @@ package se.torgammelgard.web;
 import java.text.DateFormat;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import se.torgammelgard.dto.LoginDto;
 import se.torgammelgard.dto.UserDto;
 import se.torgammelgard.exception.EmailExistsException;
+import se.torgammelgard.exception.PasswordMismatchException;
 import se.torgammelgard.persistence.entities.User;
 import se.torgammelgard.service.UserService;
 
@@ -96,9 +95,15 @@ public class RootController {
     	if (!result.hasErrors()) {
     		try {
         		newUser = userService.registerNewUser(userDto);
-        	} catch (EmailExistsException e) {
-        		// TODO handle this exception
-        	}		
+        	} catch (EmailExistsException eee) {
+        		ErrorCloset ec = new ErrorCloset();
+        		ec.setUsername_exists(true);
+        		return new ModelAndView("error", "error", ec);
+        	} catch (PasswordMismatchException pm) {
+        		ErrorCloset ec = new ErrorCloset();
+        		ec.setPassword_mismatch(true);
+        		return new ModelAndView("error", "error", ec);
+        	}
     	}
     	
     	if (!result.hasErrors()) {
