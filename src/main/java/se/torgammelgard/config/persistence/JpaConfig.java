@@ -46,9 +46,7 @@ public class JpaConfig {
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", jpaConfigurationProperties.isShowSql());
         properties.put("hibernate.format_sql", true);
-        properties.put("hibernate.hbm2ddl.auto", "create");
-//        properties.put("hibernate.hbm2ddl.auto", "validate");
-        //properties.put("hibernate.implicit_naming_strategy", env.getProperty(""));
+        properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         lef.setJpaProperties(properties);
         lef.afterPropertiesSet();
 

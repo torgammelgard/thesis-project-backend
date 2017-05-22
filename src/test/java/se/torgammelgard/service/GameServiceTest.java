@@ -14,6 +14,9 @@ import config.TestConfig;
 import se.torgammelgard.persistence.entities.Game;
 import se.torgammelgard.repository.GameRepository;
 
+/*
+ * Tests the Game service
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestConfig.class})
 //@WebAppConfiguration("se.torgammelgard.config")

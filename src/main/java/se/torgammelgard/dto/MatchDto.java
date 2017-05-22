@@ -45,7 +45,7 @@ public class MatchDto {
 		}
 		this.tennisSets = tennisSets;
 		this.date = new Date();
-		this.finished = false;
+		this.finished = true;
 	}
 	
 	public static MatchDto build(Match match) {
