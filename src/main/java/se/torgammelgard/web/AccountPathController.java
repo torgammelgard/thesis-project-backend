@@ -62,6 +62,7 @@ public class AccountPathController {
 			throw new UserNotFoundException();
 		}
 		userForm.setId(user.getId());
+		userForm.setUsername(user.getUsername());
 		if (userForm.getPassword().equals("")) {
 			userForm.setPassword(user.getPassword());	
 		} else {
