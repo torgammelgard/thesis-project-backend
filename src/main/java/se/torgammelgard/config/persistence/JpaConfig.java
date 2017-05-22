@@ -18,6 +18,9 @@ import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/*
+ * A configuration for JPA settings.
+ */
 @Configuration
 @EnableJpaRepositories(basePackages = "se.torgammelgard.repository")
 @EnableTransactionManagement

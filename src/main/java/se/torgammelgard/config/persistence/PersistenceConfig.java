@@ -13,9 +13,11 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/*
+ * Configuration for persistence (used when trying to switch data sources).
+ */
 @Configuration
 @EnableTransactionManagement
-//@ComponentScan("se.torgammelgard.persistence.entities")
 @ComponentScan("se.torgammelgard.service")
 @PropertySource("classpath:persistence-hibernate.properties")
 public class PersistenceConfig {
@@ -40,7 +42,6 @@ public class PersistenceConfig {
     @SuppressWarnings("serial")
 	Properties hibernateProperties() {
         return new Properties() {{
-            //setProperty("hibernate.connection.driver_class", env.getProperty("jdbc.driverClassname"));
         	setProperty("hibernate.connection.characterEncoding", "UTF-8");
         }};
     }

@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
+/*
+ * Configuration for message beans
+ */
 @Configuration
 public class MessageConfig {
 
