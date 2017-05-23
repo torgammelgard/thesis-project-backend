@@ -20,7 +20,7 @@ import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.service.MatchService;
 
-/*
+/**
  * API - A rest controller for handling matches.
  */
 @RestController

@@ -1,5 +1,11 @@
 package se.torgammelgard.web;
 
+/**
+ * A helper class for storing errors.
+ * 
+ * @author torgammelgard
+ *
+ */
 public class ErrorCloset {
 
 	private Boolean username_exists;

@@ -10,6 +10,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
+/**
+ * A logout (success) handler.
+ * 
+ * @author torgammelgard
+ *
+ */
 public class MyLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
 
 	@Override

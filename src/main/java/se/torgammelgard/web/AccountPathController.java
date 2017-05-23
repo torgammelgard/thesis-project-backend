@@ -19,6 +19,12 @@ import se.torgammelgard.form.UserForm;
 import se.torgammelgard.persistence.entities.User;
 import se.torgammelgard.service.UserService;
 
+/**
+ * A controller for the web page.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Controller
 @RequestMapping("/account")
 public class AccountPathController {

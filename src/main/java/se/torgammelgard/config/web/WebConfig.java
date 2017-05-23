@@ -27,6 +27,11 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import se.torgammelgard.formatters.TeamFormatter;
 import se.torgammelgard.formatters.TennisSetScoreFormatter;
 
+/**
+ * Customization of the Spring MVC configuration. The WebConfig extends an adapter,
+ * which is an implementation of WebMvcConfigurer with empty methods, which
+ * allows overriding only methods we are interested in.
+ */
 @Configuration
 @ComponentScan({"se.torgammelgard.web", "se.torgammelgard.api"})
 @EnableWebMvc
@@ -59,12 +64,6 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ServletContext
         registry.addWebRequestInterceptor(openEntityManagerInViewInterceptor());
         super.addInterceptors(registry);
     }
-    
-//	@Override
-//	public void addViewControllers(ViewControllerRegistry registry) {
-//		registry.addViewController("/login").setViewName("login");
-//		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-//	}
 	
     @Override
     public void setServletContext(ServletContext servletContext) {

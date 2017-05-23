@@ -10,6 +10,12 @@ import se.torgammelgard.dto.MatchDto;
 import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Match;
 
+/**
+ * A service for handling matches.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Service
 @Transactional
 public interface MatchService {

@@ -11,6 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+/**
+ * An entity class for storing account roles.
+ * @author torgammelgard
+ *
+ */
 @Entity
 public class Role implements Serializable {
 

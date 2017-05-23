@@ -7,6 +7,10 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import se.torgammelgard.config.CoreConfig;
 
+/**
+ * A initalizer which implements WebApplicationInitializer
+ * @see org.springframework.web.WebApplicationInitializer
+ */
 public class MyWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {

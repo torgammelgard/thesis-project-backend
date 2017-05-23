@@ -1,5 +1,8 @@
 package se.torgammelgard.dto;
 
+/**
+ * Team - data to object.
+ */
 import javax.validation.constraints.NotNull;
 
 import se.torgammelgard.persistence.entities.Team;

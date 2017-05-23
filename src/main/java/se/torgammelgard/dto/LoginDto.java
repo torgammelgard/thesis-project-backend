@@ -2,8 +2,9 @@ package se.torgammelgard.dto;
 
 import javax.validation.constraints.NotNull;
 
-// TODO do we need this? fix login checking then
-
+/**
+ * Login - data to object, for the login form.
+ */
 public class LoginDto {
 
 	@NotNull

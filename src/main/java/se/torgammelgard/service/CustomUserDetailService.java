@@ -19,6 +19,12 @@ import se.torgammelgard.persistence.entities.Role;
 import se.torgammelgard.persistence.entities.User;
 import se.torgammelgard.repository.UserRepository;
 
+/**
+ * A service for handling accounts.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Service
 @Transactional
 public class CustomUserDetailService implements UserDetailsService {

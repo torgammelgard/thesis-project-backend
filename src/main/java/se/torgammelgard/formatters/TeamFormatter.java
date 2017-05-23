@@ -10,6 +10,12 @@ import org.springframework.stereotype.Component;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.service.TeamService;
 
+/**
+ * A formatter for Team
+ * 
+ * @author torgammelgard
+ *
+ */
 @Component
 public class TeamFormatter implements Formatter<Team> {
 

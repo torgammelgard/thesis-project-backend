@@ -11,6 +11,12 @@ import se.torgammelgard.exception.TeamOwnsMatchesException;
 import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Team;
 
+/**
+ * A service for handling teams.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Service
 @Transactional
 public interface TeamService {

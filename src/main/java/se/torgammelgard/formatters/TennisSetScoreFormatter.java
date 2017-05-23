@@ -9,6 +9,12 @@ import org.springframework.format.Formatter;
 import se.torgammelgard.persistence.entities.TennisSetScore;
 import se.torgammelgard.service.TennisSetScoreService;
 
+/**
+ * A Tennis set score formatter
+ * 
+ * @author torgammelgard
+ *
+ */
 public class TennisSetScoreFormatter implements Formatter<TennisSetScore> {
 
     @Autowired

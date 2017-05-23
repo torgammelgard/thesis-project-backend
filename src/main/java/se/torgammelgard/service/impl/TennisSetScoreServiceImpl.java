@@ -10,6 +10,12 @@ import se.torgammelgard.persistence.entities.TennisSetScore;
 import se.torgammelgard.repository.TennisSetScoreRepository;
 import se.torgammelgard.service.TennisSetScoreService;
 
+/**
+ * An implementation of the service.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Component
 public class TennisSetScoreServiceImpl implements TennisSetScoreService {
 

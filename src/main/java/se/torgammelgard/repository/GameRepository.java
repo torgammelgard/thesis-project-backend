@@ -7,6 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import se.torgammelgard.persistence.entities.Game;
 
+/**
+ * A dummy Game repo.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
 

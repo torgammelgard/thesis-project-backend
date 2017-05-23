@@ -26,6 +26,12 @@ import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.service.TeamService;
 
+/**
+ * A controller for the web page.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Controller
 @RequestMapping("/team")
 public class TeamPathController {

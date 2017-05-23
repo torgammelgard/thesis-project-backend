@@ -5,6 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import se.torgammelgard.persistence.entities.Privilege;
 
+/**
+ * A Privilege repo.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Repository
 public interface PrivilegeRepository extends JpaRepository<Privilege, Long> {
 	

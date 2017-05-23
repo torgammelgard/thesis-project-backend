@@ -1,5 +1,10 @@
 package se.torgammelgard.form;
 
+/**
+ * DTO used at login page.
+ * @author torgammelgard
+ *
+ */
 public class UserForm {
 
 	private Long id;

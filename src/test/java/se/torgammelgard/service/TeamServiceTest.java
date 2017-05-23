@@ -19,7 +19,7 @@ import config.TestConfig;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.persistence.entities.User;
 
-/*
+/**
  * Tests the Team service
  */
 @RunWith(SpringJUnit4ClassRunner.class)

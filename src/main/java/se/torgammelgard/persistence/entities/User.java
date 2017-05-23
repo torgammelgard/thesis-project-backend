@@ -19,6 +19,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import se.torgammelgard.Views;
 
+/**
+ * An entity class for storing users.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Entity
 @Table(name = "USERS")
 public class User implements Serializable {

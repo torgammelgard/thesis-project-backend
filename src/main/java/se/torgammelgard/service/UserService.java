@@ -8,6 +8,12 @@ import se.torgammelgard.exception.PasswordMismatchException;
 import se.torgammelgard.form.UserForm;
 import se.torgammelgard.persistence.entities.User;
 
+/**
+ * A service for handling users.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Service
 public interface UserService {
 

@@ -3,6 +3,9 @@ package se.torgammelgard.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * User - data to object.
+ */
 public class UserDto {
 
 	@NotNull

@@ -19,6 +19,12 @@ import se.torgammelgard.repository.PrivilegeRepository;
 import se.torgammelgard.repository.RoleRepository;
 import se.torgammelgard.repository.UserRepository;
 
+/**
+ * A class which listens to when the context gets refreshed and adds a Test user with roles and privileges.
+ *  
+ * @author torgammelgard
+ *
+ */
 @Component
 public class InitialDataLoader implements
   ApplicationListener<ContextRefreshedEvent> {

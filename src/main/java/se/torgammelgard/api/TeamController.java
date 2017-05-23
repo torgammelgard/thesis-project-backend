@@ -20,7 +20,7 @@ import se.torgammelgard.exception.UserNotFoundException;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.service.TeamService;
 
-/*
+/**
  * API - A rest controller for handling teams.
  */
 @Controller

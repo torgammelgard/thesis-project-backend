@@ -22,7 +22,7 @@ import se.torgammelgard.persistence.entities.Game;
 import se.torgammelgard.repository.GameRepository;
 import se.torgammelgard.service.GameService;
 
-/*
+/**
  * A dummy controller for the dummy entity Game. Used for testing during production.
  */
 @RestController

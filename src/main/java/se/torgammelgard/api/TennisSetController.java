@@ -18,7 +18,7 @@ import se.torgammelgard.Views;
 import se.torgammelgard.persistence.entities.TennisSet;
 import se.torgammelgard.service.TennisSetService;
 
-/*
+/**
  * API - A rest controller for handling teams.
  */
 @Controller

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -25,11 +24,16 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import se.torgammelgard.Views;
 
+/**
+ * An entity class for storing tennis teams. (A tennis player and a partner)
+ * 
+ * @author torgammelgard
+ *
+ */
 @Entity
 @NamedQuery(name = "Team.totalCount", query = "select count(*) from Team")
 @Table(name = "TEAMS")
 @PropertySource(value = "classpath:/messages.properties")
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 			// not sure if needed
 public class Team implements Serializable {
 
 	private static final long serialVersionUID = 146345634234L;

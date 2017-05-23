@@ -13,6 +13,9 @@ import se.torgammelgard.persistence.entities.TennisSet;
 import se.torgammelgard.persistence.entities.TennisSetScore;
 import se.torgammelgard.persistence.entities.User;
 
+/**
+ * Match - data to object. 
+ */
 public class MatchDto {
 
 	private Long id;

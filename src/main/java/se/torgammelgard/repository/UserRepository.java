@@ -5,6 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import se.torgammelgard.persistence.entities.User;
 
+/**
+ * A User repo.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 

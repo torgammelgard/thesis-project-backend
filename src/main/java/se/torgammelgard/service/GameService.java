@@ -7,6 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import se.torgammelgard.persistence.entities.Game;
 
+/**
+ * A dummy service for handling games.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Service
 @Transactional
 public interface GameService {

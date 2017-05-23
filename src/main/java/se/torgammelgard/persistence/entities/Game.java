@@ -14,7 +14,13 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import se.torgammelgard.Views;
 
-@Entity
+/**
+ * A dummy entity class, user for testing new things.
+ * 
+ * @author torgammelgard
+ *
+ */
+@Entity 
 @NamedQuery(name = "Game.findByVersion", query = "select g from Game g where g.version = ?1")
 @Table(name = "GAMES")
 public class Game implements Serializable {

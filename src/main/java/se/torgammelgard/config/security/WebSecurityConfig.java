@@ -13,6 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import se.torgammelgard.web.MyLogoutSuccessHandler;
 
+/**
+ * Spring security configuration
+ */
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 

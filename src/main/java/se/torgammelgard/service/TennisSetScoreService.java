@@ -7,6 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import se.torgammelgard.persistence.entities.TennisSetScore;
 
+/**
+ * A service for handling tennis set scores.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Service
 @Transactional
 public interface TennisSetScoreService {

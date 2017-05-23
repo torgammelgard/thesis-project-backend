@@ -21,6 +21,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import se.torgammelgard.Views;
 
+/**
+ * An entity class for storing tennis matches.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Entity
 @Table(name = "MATCHES")
 public class Match {

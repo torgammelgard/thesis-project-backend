@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 import se.torgammelgard.config.web.WebConfig;
 
-/*
+/**
  * Configuration file - Entry point
  */
 @Configuration

@@ -3,8 +3,6 @@ package se.torgammelgard.service.impl;
 import java.security.Principal;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +14,12 @@ import se.torgammelgard.repository.MatchRepository;
 import se.torgammelgard.repository.UserRepository;
 import se.torgammelgard.service.MatchService;
 
+/**
+ * An implementation of the service.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Component
 public class MatchServiceImpl implements MatchService {
 

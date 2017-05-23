@@ -17,6 +17,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import se.torgammelgard.Views;
 
+/**
+ * An entity class for storing tennis sets.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Entity
 @Table(name = "TENNISSETS")
 public class TennisSet {
@@ -31,14 +37,6 @@ public class TennisSet {
     
     @JsonView(Views.Public.class)
     private int setNumber;
-    
-//    @JsonView(Views.Public.class)
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "tennisset_tennissetscore",
-//            joinColumns = @JoinColumn(name = "tennisset_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "tennissetscore_id", referencedColumnName = "id"))
-//    private List<TennisSetScore> tennisSetScore = new ArrayList<>(0);
 
     @JsonView(Views.Public.class)
     @ManyToOne(cascade = CascadeType.ALL)

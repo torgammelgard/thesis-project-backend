@@ -15,6 +15,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import se.torgammelgard.Views;
 
+/**
+ * An entity class for storing tennis set scores.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Entity
 @Table(name = "TENNISSETSCORES")
 public class TennisSetScore {

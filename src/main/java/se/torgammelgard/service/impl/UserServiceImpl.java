@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.mysql.cj.core.exceptions.PasswordExpiredException;
-
 import se.torgammelgard.dto.UserDto;
 import se.torgammelgard.exception.EmailExistsException;
 import se.torgammelgard.exception.PasswordMismatchException;
@@ -20,6 +18,12 @@ import se.torgammelgard.repository.RoleRepository;
 import se.torgammelgard.repository.UserRepository;
 import se.torgammelgard.service.UserService;
 
+/**
+ * An implementation of the service.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Component
 public class UserServiceImpl implements UserService {
 

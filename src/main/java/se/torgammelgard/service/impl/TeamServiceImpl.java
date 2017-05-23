@@ -16,6 +16,12 @@ import se.torgammelgard.repository.TeamRepository;
 import se.torgammelgard.repository.UserRepository;
 import se.torgammelgard.service.TeamService;
 
+/**
+ * An implementation of the service.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Component
 @Transactional
 public class TeamServiceImpl implements TeamService {

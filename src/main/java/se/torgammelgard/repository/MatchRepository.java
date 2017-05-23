@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 import se.torgammelgard.persistence.entities.Match;
 import se.torgammelgard.persistence.entities.User;
 
+/**
+ * A Match repo.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Long> {
 

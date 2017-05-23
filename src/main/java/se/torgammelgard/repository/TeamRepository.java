@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.persistence.entities.User;
 
+/**
+ * A Team repo.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Long> {
 

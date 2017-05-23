@@ -16,7 +16,7 @@ import se.torgammelgard.persistence.entities.Team;
 import se.torgammelgard.persistence.entities.TennisSet;
 import se.torgammelgard.persistence.entities.TennisSetScore;
 
-/*
+/**
  * Tests the Match service
  */
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -9,6 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+/**
+ * An entity class for storing account privileges.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Entity
 public class Privilege implements Serializable {
   

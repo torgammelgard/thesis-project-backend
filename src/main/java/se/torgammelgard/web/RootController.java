@@ -26,6 +26,12 @@ import se.torgammelgard.exception.PasswordMismatchException;
 import se.torgammelgard.persistence.entities.User;
 import se.torgammelgard.service.UserService;
 
+/**
+ * The root controller for the web page.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Controller
 @RequestMapping("/")
 public class RootController {

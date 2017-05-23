@@ -10,6 +10,12 @@ import se.torgammelgard.persistence.entities.Game;
 import se.torgammelgard.repository.GameRepository;
 import se.torgammelgard.service.GameService;
 
+/**
+ * An implementation of the service.
+ * 
+ * @author torgammelgard
+ *
+ */
 @Component
 public class GameServiceImpl implements GameService {
 
