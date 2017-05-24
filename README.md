@@ -38,6 +38,8 @@ And after the tables have been created,
 `hibernate.hbm2ddl.auto=validate`, to only validate that they are in place.
  
 ### Database settings
+Make sure that MySQL 5 (5.6.28) is running.
+
 The application tries to connect to the MySQL database through JDBC interface on, 
 
 Port : `3306`
